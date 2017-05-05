@@ -1,4 +1,4 @@
-# ![Markdown Here logo](https://raw.github.com/adam-p/markdown-here/master/src/common/images/icon48.png)
+# ![Markdown Here logo](https://raw.githubusercontent.com/nickmc01/materis/master/app/assets/images/logo.png)
 
 Materis is a task & productivity management application ideal for fast growing startups and small companies. 
 
