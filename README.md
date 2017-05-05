@@ -34,14 +34,7 @@ bundle install
 
 ### Create and configure database
 
-#### 1. With docker
-```sh
-cp config/database.yml.example config/database.yml
-cp app.env.example app.env
-```
-Database configurations relies on the file app.env . After above steps update this file with actual credentials.
 
-#### 2. Without docker
 ```sh
 cp config/database.yml.example config/database.yml
 ```
@@ -58,19 +51,6 @@ rake db:seed
 ```
 ### Start the application
 
-#### 1. With docker
-Start container with:
-```sh
-docker-compose up -d --build --remove-orphans
-```
-
-And to access the container:
-
-```sh
-docker exec -it Materis /bin/bash
-```
-
-#### 2. Without docker
 You can start the Rails server using
 ```sh
 rails server
