@@ -1,0 +1,106 @@
+<div class="pane3-padding">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="project-card">
+        <div class="profile-avatar">
+          <%= image_tag(@user.image.thumbnail) %>
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="project-title">
+                <%= @user.name %> (<%= @user.nickname %>)
+              </div>
+              <div class="project-code"><%= @user.employee_code %></div>
+              <div class="project-website"><%= @user.email %></div>
+            </div>
+            <div class="col-sm-6">
+              <% if can? :edit, @user %>
+                  <a href="#" data-options="align:left" data-dropdown="drop1" class="dropdown right">
+                    <i class="material-icons md-18">more_vert</i>
+                  </a>
+                  <ul id="drop1" data-dropdown-content class="f-dropdown">
+                    <li>
+                      <%= link_to "Edit", edit_user_path(@user) %>
+                    </li>
+                    <% if @user == current_user %>
+                        <li>
+                          <%= link_to "Change password", change_password_users_path %>
+                        </li>
+                    <% end %>
+                    <% if current_user.manager? %>
+                        <li>
+                          <%= link_to "Delete", user_path(user), :method => :delete, :confirm => 'Are you sure you want to archive this employee?' %>
+                        </li>
+                    <% end %>
+                  </ul>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="project-card">
+          <div class="card-header text-uppercase">Managers</div>
+          <div class="items-list">
+            <div class="il-item">
+              <a class="text-black" href="#">
+                <div class="media">
+                  <div class="media-body">
+                    <h6 class="media-heading">
+                      <% @managers.each do |manager| %>
+                          <%= link_to manager.name, user_path(manager) %>
+                      <% end %></h6>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="project-card mb-0">
+          <div class="data-container">
+            <dl class="tabs" data-tab>
+              <dd class="active"><a href="#user-projects">
+                Teams <span class="tag tag-teams"><%= @user.teams.count %></span>
+              </a></dd>
+              <dd><a href="#user-teams">
+                Departments <span class="tag tag-teams"><%= @user.projects.count %></span>
+              </a></dd>
+              <dd><a href="#user-okrs">
+                OKRS <span class="tag tag-teams"><%= @user.okrs.count %></span>
+              </a></dd>
+            </dl>
+
+            <div class="tabs-content">
+              <div class="content active" id="user-projects">
+                <%= render :partial => 'teams/team_list', :locals => {:teams => @teams.present? ? @teams : @user.teams} %>
+              </div>
+              <div class="content" id="user-teams">
+                <%= render :partial => 'projects/list_projects', :locals => {:projects => @projects.present? ? @projects : @user.projects} %>
+              </div>
+              <div class="content" id="user-okrs">
+                <div class="card-header text-uppercase">
+                  <b>
+                    <% if can? :cru, Okr, @user %>
+                        <%= link_to 'New OKR', new_user_okr_path(@user), :class => "dashed_link transition new-team" %>
+                    <% end %>
+                  </b>
+                </div>
+                <%= render :partial => 'okrs/okr_list', :locals => {:okrs => @user.okrs}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('.users.card').removeClass('active')
+    $('.user-<%= @user.id %>').addClass('active')
+</script>

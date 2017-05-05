@@ -1,0 +1,59 @@
+<% if @projects.empty? %>
+    You have no projects
+<% else %>
+    <%= form_for(@team, :html => {:class => 'form-horizontal', :multipart => true, :data => {:abide => true}}) do |f| %>
+      <div class="pane3-padding">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="project-card">
+              <div class="card-block">
+                <div class="form-content form-below">
+                  <%= build_validated_field('team', 'name', 'Name', 'Cannot be blank', '[a-zA-Z]+', 'text', @team.name) %>
+                  <%= build_validated_field('team', 'code', 'Code', 'Cannot be blank', '[a-zA-Z]+', 'text', @team.code) %>
+                  <%= build_field('team', 'description', 'Description', 'text_area', @team.description) %>
+                  <%= build_field('team', 'image', 'Image', 'file',@team.image) %>
+                  <%= f.label :project_id, "Department" %>
+                  <%= f.select :project_id, @projects.map { |x| [x.name, x.id] } %>
+                  <%= f.label :team_lead_ids, 'Project leads' %>
+                  <%= f.select :team_lead_ids, @users.map { |x| [x.name, x.id] }, {}, {:multiple => true} %>
+                  <%= f.label 'Team Color' %>
+
+                  <div class="colorPicker">
+                    <input <%= if @team.color == '#fe4365' then 'checked="checked"' end %> class="red" id="hat-color-red" name="team[color]" value="#fe4365" type="radio">
+                    <label class="red" for="hat-color-red"></label>
+
+                    <input <%= if @team.color == '#83af9b' then 'checked="checked"' end %> class="green" id="hat-color-green" name="team[color]" value="#83af9b" type="radio">
+                    <label class="green" for="hat-color-green"></label>
+
+                    <input <%= if @team.color == '#355c7d' then 'checked="checked"' end %> class="blue" id="hat-color-blue" name="team[color]" value="#355c7d" type="radio">
+                    <label class="blue" for="hat-color-blue"></label>
+
+                    <input <%= if @team.color == '#6c5b7b'  then 'checked="checked"' end %> class="violet" id="hat-color-violet" name="team[color]" value="#6c5b7b" type="radio">
+                    <label class="violet" for="hat-color-violet"></label>
+
+                    <input <%= if @team.color == '#363636' then 'checked="checked"' end %> class="gray" id="hat-color-gray" name="team[color]" value="#363636" type="radio">
+                    <label class="gray" for="hat-color-gray"></label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pane3-padding">
+        <div class="right">
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      teams_path, :class => 'button alert' %>
+          <%= f.submit nil, :class => 'button success', :disable_with => "Saving" %>
+        </div>
+      </div>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+    window.location = '#pane3'
+</script>
+
+
+

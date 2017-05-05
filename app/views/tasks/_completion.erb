@@ -1,0 +1,28 @@
+<div  data-dropdown-content="" style="position: static;">
+  <% if task.status == 'completed' %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="project-card no-border relative">
+            <div class="card-block shadowed">
+              Completed on
+              <%= task.completed_on.strftime('%d/%m/%Y %H:%M') %>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% else %>
+      <%= form_for :task, :url => completion_task_path(task.id), :remote => true do |f| %>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="project-card no-border relative">
+                <div class="card-block shadowed">
+                  <%= f.label :completed_on %>
+                  <%= f.text_field :completed_on, :value => Time.now.strftime('%d/%m/%Y %H:%M') %>
+                  <button class="button">Done</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,15 @@
+<%= content_for :pane2 do %>
+    <%= render :partial => 'tasks/task_list' %>
+<% end %>
+
+
+<div class="row">
+  <div class="col-sm-12 pane3-padding">
+    <%= render :partial => 'show', :locals => {:task => @task, :project => @project, :team => @team} %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    window.location = '#pane3'
+</script>

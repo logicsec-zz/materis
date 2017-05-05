@@ -1,0 +1,28 @@
+<div class="card-header text-uppercase"></div>
+<div class="items-list">
+  <% @user.okrs.each do |okr| %>
+      <div class="il-item">
+        <a class="text-black" href="#">
+          <div class="media">
+            <div class="media-body">
+              <div class="col-sm-6">
+                <h6 class="media-heading">
+                  <%= link_to okr.name, user_okr_path(@user, okr), :remote => false, :class => 'grey-link' %>
+                  <br/>
+
+                  <div class="date">
+                    <%= "#{okr.start_date.strftime("%d %B %Y")} - #{okr.end_date.strftime("%d %B %Y")}" %>
+                  </div>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $('#okr_user_id').on('change',function(){
+      window.location = '/users/'+$('#okr_user_id').val()+'/okrs'
+  });
+</script>

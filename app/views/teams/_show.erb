@@ -1,0 +1,102 @@
+<% assignables = Team.assignable_by_user(current_user).collect(&:id) %>
+<div class="pane3-padding team-show">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="project-card">
+        <div class="profile-avatar">
+          <%= image_tag(team.image.thumbnail) %>
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="project-title">
+                <%= team.name %>
+              </div>
+              <div class="project-code"><%= team.code %></div>
+            </div>
+            <div class="col-sm-6">
+              <% if can? :edit, team %>
+                  <a href="#" data-options="align:left" data-dropdown="drop1" class="dropdown right">
+                    <i class="material-icons md-18">more_vert</i>
+                  </a>
+                  <ul id="drop1" data-dropdown-content class="f-dropdown">
+                    <li>
+                      <%= link_to "Edit", edit_team_path(team) %>
+                    </li>
+                    <li>
+                      <%= link_to "Delete", team_path(team),:method=>:delete, data: { confirm: 'Are you sure you want to delete this project?' } %>
+                    </li>
+                  </ul>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="project-card">
+          <div class="card-header text-uppercase">Description</div>
+          <div class="items-list">
+            <div class="il-item">
+              <a class="text-black" href="#">
+                <div class="media">
+                  <div class="media-body">
+                    <h6 class="media-heading"><%= team.description %></h6>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="project-card mb-0">
+          <div class="data-container">
+            <dl class="tabs" data-tab>
+              <dd><a href="#team-members">
+                Members <span class="tag tag-members"><%= team.members_count %></span>
+              </a></dd>
+              <dd><a href="#team-leads">
+                Managers <span class="tag tag-managers"><%= team.managers_count %></span>
+              </a></dd>
+              <dd><a href="#team-tasks">
+                Tasks <span class="tag tag-members"><%= team.total_tasks %></span>
+              </a></dd>
+            </dl>
+            <div class="tabs-content">
+              <div class="content active" id="team-members">
+                <div class="card-header text-uppercase">
+                  <b>
+                    <% if can? :edit, @team %>
+                      <%= link_to 'Add members', team_add_members_path(team), :remote => false, :class => 'dashed_link transition new-team' %>
+                    <% end %>
+                  </b>
+                </div>
+                <%= render :partial => 'users/user_list', :locals => {:users => members.present? ? members : team.members} %>
+              </div>
+              <div class="content" id="team-leads">
+                <%= render :partial => 'users/user_list', :locals => {:users => team_leads.present? ? team_leads : team.team_leads} %>
+              </div>
+              <div class="content" id="team-tasks">
+                <div class="card-header text-uppercase">
+                  <b>
+                    <% if assignables.include?(team.id) %>
+                        <%= link_to 'Add task', new_task_path(:team_id => team.id), :remote => false, :class => 'dashed_link transition new-team' %>
+                    <% end %>
+                  </b>
+                </div>
+                <%= render :partial => 'tasks/task_project_list', :locals => {:tasks => @team.tasks} %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('.team-card').removeClass('active')
+    $('.team-<%= team.id %>').addClass('active')
+</script>

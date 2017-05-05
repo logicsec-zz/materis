@@ -1,0 +1,16 @@
+<%= render :partial => 'comments/form' %>
+<% @comments.each do |comment| %>
+    <div class="comments-panel">
+      <div class="col-sm-1">
+        <%= link_to image_tag(comment.user.image.icon), user_path(comment.user), :class => 'left' %>
+      </div>
+      <div class="col-sm-11">
+        <div class="row">
+          <%= link_to comment.user.name, user_path(comment.user), :class => 'comment-name' %></span> <span class="date"><%= comment.created_at.max_diff %></span>
+        </div>
+        <div class="row">
+          <span class="comment-body"><%= comment.body %></span>
+        </div>
+      </div>
+    </div>
+<% end %>

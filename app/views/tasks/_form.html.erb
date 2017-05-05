@@ -1,0 +1,90 @@
+<% if @team.present? %>
+    <%= form_for @task, :html => {:class => 'form-horizontal task-form', :multipart => true, :data => {:abide => true}} do |f| %>
+        <div class="pane3-padding">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="project-card">
+                <div class="card-block">
+                  <div class="form-content form-below">
+                    <%= f.hidden_field :task_id, :value => @root_task.id if @root_task.present? %>
+                    <%= f.hidden_field :team_id, :value => @root_task.team_id if @root_task.present? %>
+                    <%= f.hidden_field :project_id, :value => @root_task.project_id if @root_task.present? %>
+                    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+                    <%= build_validated_field('task', 'name', 'Title', 'Cannot be blank', '', 'text', @task.name) %>
+                    <%= build_field('task', 'description', 'Description', 'text_area', @task.description) %>
+
+                    <% unless @root_task.present? %>
+                      <%= f.label :team_id, 'Team' %>
+                      <%= select_tag "task[team_id]", grouped_options_for_select(@grouped_teams, @team.id) %>
+                    <% end %>
+
+                    <%= build_validated_field('task', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @task.start_date) %>
+                    <%= build_validated_field('task', 'end_date', 'End Date', 'Cannot be blank', '', 'date_field', @task.end_date) %>
+
+                    <% if @task.status == 'completed' %>
+                      <%= f.label :status, 'Status' %>
+                      <%= select_tag('task[status]', options_for_select([['Pending', 'active'], ['Completed', 'completed']], @task.status)) %>
+                    <% end %>
+
+                    <div class="priority-selector">
+                      <%= build_validated_select('task', 'priority', 'Priority', 'Should select at least one', '', false, @task.priority, ['Low', 'Medium', 'High', 'Showstopper']) %>
+                    </div>
+                    <div class="assignees-select">
+                      <%= render :partial => 'teams/members' %>
+                    </div>
+                    <br>
+                    <br>
+                  </div>
+                </div>
+
+                <div class="pane3-padding">
+                  <div class="right">
+                    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                                tasks_path, :class => 'button alert' %>
+                    <%= f.submit nil, :class => 'button success', data: {disable_with: "Saving"} %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+<% else %>
+    <div class="message">
+      You have no access to a team in order to assign a task.
+    </div>
+<% end %>
+
+<script type="text/javascript">
+    window.location = '#pane3'
+    $('select').not('.select_add').select2({'width': '100%'});
+    $('.team-selector').on("change", function () {
+        load_assignees()
+    });
+
+
+    $('.date-input').datetimepicker({
+        onSelectDate: function () {
+            load_assignees();
+        }
+    });
+
+    $('#task_team_id').bind("change", function () {
+        load_assignees()
+    });
+    $('#task_start_date').bind("input", function () {
+        load_assignees()
+    });
+    $('#task_end_date').bind("input", function () {
+        load_assignees()
+    });
+    function load_assignees() {
+        if ($('#task_team_id').val() == '' || $('#task_start_date').val() == '' || $('#task_end_date').val() == '') {
+            $('.assignees-select').html('Choose end date, start date and team for the task');
+        } else {
+            $('.assignees-select').html('satisfied');
+            $.get('/teams/get_member_list?team_id=' + $('#task_team_id').val() + '&start_date=' + $('#task_start_date').val() + '&end_date=' + $('#task_end_date').val() + "&task_id=<%= @task.try(&:id) %>")
+        }
+    }
+</script>
