@@ -92,7 +92,6 @@ class TeamsController < ApplicationController
 
   # DELETE /teams/1
   # DELETE /teams/1.json
-  # Need to check if the user in a list is also a team lead already. If they are, we need to not show them in the list.
   def destroy
     @team.destroy
     respond_to do |format|
@@ -121,6 +120,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.fetch(:team).permit(:name, :code, :description, :project_id, :members_count, :managers_count, :is_deleted, :pending_tasks, :status, :image, :color, :team_lead_ids => [], :user_ids => [])
+    params.fetch(:team).permit(:name, :code, :description, :project_id, :members_count, :managers_count, :is_deleted, :pending_tasks, :status, :image, :team_lead_ids => [], :user_ids => [])
   end
 end

@@ -13,8 +13,6 @@ class Task < ActiveRecord::Base
   has_many :users, -> { uniq }, :through => :key_results
 
 
-  # default_scope { where.not(is_deleted: true).order('id desc') }
-
   before_create :add_tracker_id
 
   after_save :update_team_task_count
@@ -71,4 +69,5 @@ class Task < ActiveRecord::Base
       self.completed_on = nil
     end
   end
+
 end
