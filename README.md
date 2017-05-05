@@ -10,12 +10,9 @@ Materis is engineered based on the concepts of [OKR](https://en.wikipedia.org/wi
 - Maintaining log of time spent by employees
 - Generating different types of reports, and in different formats
 - Analyzing progress and productivity of your company, its departments, teams and employees
-- OAuth server with filtered access to users	
-
-> “through discipline comes freedom” - aristotle
 
 ## License
-Materis is released under [Apache License 2.0](https://github.com/foradian/Materis/blob/master/LICENSE)
+Materis is released under [Apache License 2.0](https://github.com/nickmc01/Materis/blob/master/LICENSE)
 
 
 ## Installation
