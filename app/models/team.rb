@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   belongs_to :project
+  has_and_belongs_to_many :jobs
   has_many :team_members, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :users, :through => :team_members

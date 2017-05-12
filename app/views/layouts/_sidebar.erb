@@ -2,7 +2,7 @@
   <li class="navigation-title">Navigation</li>
   <li><%= link_to raw('<i class="fi-monitor"></i> Dashboard'), root_path, :class => current_class?(root_path) %></li>
   <li>
-    <%= link_to raw("<i class='fi-clipboard-notes'></i> Tasks <span class='details right'>#{current_user.tasks.pending.count}</span>"), tasks_path, :class => current_class?(tasks_path) %>
+    <%= link_to raw("<i class='fi-clipboard-notes'></i> Tasks <span class='details right'>#{current_user.assignments.count}</span>"), tasks_path, :class => current_class?(tasks_path) %>
   </li>
 
   <dl class="accordion report-list" data-accordion>
@@ -12,21 +12,20 @@
         Departments
       </a>
       <div id="department_list" class="content report-options">
-        <% if current_user.teams.unarchived.count == 0 %>
+        <% if current_user.projects == 0 %>
           <li>No Departments Available</li>
         <% else %>
           <li><div class="square" style="border: solid 5px #ffd800;"></div> <%= link_to 'All Departments', projects_path, :remote => false %></li>
           <li class="teams-menu-title">My Departments</li>
-          <% current_user.projects.active.each do |project| %>
+          <% current_user.joined_projects.uniq.each do |team| %>
             <li>
-              <div class="square" style="border: solid 5px <%=project.color %>;"></div> <%= link_to project.name, project_path(project), :remote => false %>
+              <div class="square" style="border: solid 5px <%=team.color %>;"></div> <%= link_to team.name, project_path(team), :remote => false %>
             </li>
           <% end %>
         <% end %>
       </div>
     </dd>
   </dl>
-
   <dl class="accordion report-list" data-accordion>
     <dd>
       <a href="#team_list" class="reports-link">
@@ -40,7 +39,7 @@
 
           <li><div class="square" style="border: solid 5px #ffd800;"></div> <%= link_to 'All Teams', teams_path, :remote => false %></li>
           <li class="teams-menu-title">My Teams</li>
-          <% current_user.teams.unarchived.each do |team| %>
+          <% current_user.teams.unarchived.uniq.each do |team| %>
             <li>
               <div class="square" style="border: solid 5px <%=team.color %>;"></div> <%= link_to team.name, team_path(team), :remote => false %>
             </li>
@@ -51,6 +50,7 @@
     </dd>
   </dl>
 
+  <li><%= link_to raw("<i class='fi-torso'></i> Projects"), jobs_path, :class => current_class?(jobs_path) %></li>
   <li><%= link_to raw("<i class='fi-torso'></i> Users"), users_path, :class => current_class?(users_path) %></li>
   <li><%= link_to raw("<i class='fi-compass'></i> OKR"), okrs_path, :class => current_class?(okrs_path) %></li>
   <li><%= link_to raw("<i class='fi-graph-trend'></i> Reports"), reports_worklogs_path, :class => current_class?(reports_worklogs_path) %></li>

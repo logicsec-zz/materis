@@ -35,13 +35,20 @@
         <%= render 'layouts/sidebar' %>
         <%= yield :sidebar %>
       </div>
-      <div class="large-4 columns pane2" id="pane2">
-        <%= yield :pane2%>
-      </div>
-      <div class="large-6 columns pane3" id="pane3">
-        <%= yield :pane3 %>
-        <%= yield %>
-      </div>
+      <% if current_page?('/') %>
+          <div class="large-10 columns" id="pane3">
+            <%= yield :pane3 %>
+            <%= yield %>
+          </div>
+      <% else %>
+          <div class="large-4 columns pane2" id="pane2">
+            <%= yield :pane2%>
+          </div>
+          <div class="large-6 columns pane3" id="pane3">
+            <%= yield :pane3 %>
+            <%= yield %>
+          </div>
+      <% end %>
     </div>
   </body>
 </html>

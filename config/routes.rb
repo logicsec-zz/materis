@@ -1,4 +1,4 @@
-Fluxday::Application.routes.draw do
+Materis::Application.routes.draw do
 
   resources :oauth_applications
 
@@ -70,6 +70,8 @@ Fluxday::Application.routes.draw do
     end
     resources :teams
   end
+
+  resources :jobs, :path => 'projects'
 
   resources :users do
     resources :okrs do

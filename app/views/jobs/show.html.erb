@@ -1,0 +1,12 @@
+<%= content_for :pane2 do %>
+    <%= render :partial => 'jobs/job_list', :locals => {:jobs => @jobs} %>
+<% end %>
+
+<%= content_for :pane3 do %>
+    <% if @job.present? %>
+        <%= render :partial => 'jobs/show', :locals => {:job => @job} %>
+    <% end %>
+<% end %>
+<script type="text/javascript">
+    window.location = '#pane3'
+</script>

@@ -32,6 +32,8 @@ class TasksController < ApplicationController
   def new
     @root_task = Task.find(params[:task_id]) if params[:task_id].present?
     @team = @root_task.team if params[:task_id].present?
+    @jobs = Job.all
+    @job= @jobs.first
     @task = @root_task.present? ? @root_task.sub_tasks.new : Task.new
     @task.start_date = Time.now
     @task.end_date = Time.now
@@ -41,8 +43,18 @@ class TasksController < ApplicationController
       @task.project_id = @team.project_id if @team.present?
     end
     @teams = Team.assignable_by_user(current_user).includes(:project)
+
+    if params[:project_id].present?
+      @job = Job.find(params[:project_id])
+      @task.job_id = @job.id if @job.present?
+    end
+
     @grouped_teams = @teams.inject({}) do |options, team|
       (options[team.project.name] ||= []) << [team.name, team.id]
+      options
+    end
+    @grouped_jobs = @jobs.inject({}) do |options, job|
+      (options[job.name] ||= []) << [job.name, job.id]
       options
     end
     @team ||= @teams.first
@@ -62,10 +74,21 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @projects = Project.active
+
+    @jobs = Job.all
+    @task.job_id = @job.id if @job.present?
+    @job = Job.find(@task.job_id)
+
     @team ||= @task.team
     @teams = Team.assignable_by_user(current_user).includes(:project)
+
     @grouped_teams = @teams.inject({}) do |options, team|
       (options[team.project.name] ||= []) << [team.name, team.id]
+      options
+    end
+
+    @grouped_jobs = @jobs.inject({}) do |options, job|
+      (options[job.name] ||= []) << [job.name, job.id]
       options
     end
 
@@ -132,6 +155,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:name, :description, :start_date, :task_id, :end_date, :project_id, :team_id, :user_id, :tracker_id, :priority, :comments_count, :status, :completed_on, :key_result_ids => [], :user_ids => [])
+    params.require(:task).permit(:name, :description, :start_date, :task_id, :end_date, :project_id, :team_id, :user_id, :job_id, :tracker_id, :priority, :comments_count, :status, :completed_on, :key_result_ids => [], :user_ids => [])
   end
 end

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  description: MyText
+  is_deleted: false
+  team_count: 1
+  image: MyString
+  color: MyString
+
+two:
+  name: MyString
+  code: MyString
+  description: MyText
+  is_deleted: false
+  team_count: 1
+  image: MyString
+  color: MyString

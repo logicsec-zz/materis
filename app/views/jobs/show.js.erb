@@ -1,0 +1,8 @@
+$('.pane3').html("<%= escape_javascript(render :partial => 'jobs/show',:locals=>{:job=>@job}) %>")
+$(document).foundation({
+    tab: {
+        callback: function (tab) {
+        }
+    }
+});
+window.location = '#pane3'

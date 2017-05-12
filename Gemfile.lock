@@ -37,7 +37,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.1.4)
     cancancan (1.16.0)
-    carrierwave (1.0.0)
+    carrierwave (1.1.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
@@ -58,6 +58,8 @@ GEM
       warden (~> 1.2.3)
     doorkeeper (1.1.0)
       railties (>= 3.1)
+    entypo-rails (2.2.3)
+      railties (>= 3.1, <= 5)
     erubis (2.7.0)
     eventmachine (1.2.3)
     execjs (2.7.0)
@@ -201,6 +203,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise (= 3.2.4)
   doorkeeper (= 1.1.0)
+  entypo-rails
   foundation-icons-sass-rails
   foundation-rails (= 5.2.1.0)
   friendly_id (~> 5.0.0)

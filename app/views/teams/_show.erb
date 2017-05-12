@@ -77,15 +77,12 @@
                 <%= render :partial => 'users/user_list', :locals => {:users => members.present? ? members : team.members} %>
               </div>
               <div class="content" id="team-leads">
+                <div class="card-header text-uppercase">
+                </div>
                 <%= render :partial => 'users/user_list', :locals => {:users => team_leads.present? ? team_leads : team.team_leads} %>
               </div>
               <div class="content" id="team-tasks">
                 <div class="card-header text-uppercase">
-                  <b>
-                    <% if assignables.include?(team.id) %>
-                        <%= link_to 'Add task', new_task_path(:team_id => team.id), :remote => false, :class => 'dashed_link transition new-team' %>
-                    <% end %>
-                  </b>
                 </div>
                 <%= render :partial => 'tasks/task_project_list', :locals => {:tasks => @team.tasks} %>
               </div>

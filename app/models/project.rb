@@ -12,6 +12,7 @@ class Project < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   default_scope{ order("projects.name ASC")}
+
   scope :active, -> {where(is_deleted: false)}
   scope :archived, -> {where(is_deleted: true)}
 

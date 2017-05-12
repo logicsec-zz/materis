@@ -10,6 +10,5 @@ class TeamMember < ActiveRecord::Base
     user.update_attributes(:admin_teams_count=>user.admin_teams.count) if self.role == 'lead'
     team.update_attributes(:members_count=>team.users.active.count)
     team.update_attributes(:managers_count=>team.team_leads.active.count)
-    #team.project.update_attributes(:member_count=>team.project.project_members.active.count)
   end
 end

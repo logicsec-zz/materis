@@ -29,34 +29,17 @@ gem 'jquery-turbolinks', '2.0.2'
 gem 'jbuilder', '~> 1.2'
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-
 gem 'devise', '3.2.4'
-
 gem "therubyracer"
-#gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "foundation-rails",'5.2.1.0'
 gem 'hirb'
 gem 'thin'
 gem 'carrierwave'
 gem "mini_magick"
 gem "select2-rails", '3.5.4'
-#gem "cancan"
 gem 'cancancan', '~> 1.7'
 gem "omniauth-google-oauth2"
 gem "ransack"
@@ -70,4 +53,5 @@ gem "omniauth-oauth2"#, '1.0.2'
 gem 'omniauth-fluxapp' , :git  => 'https://github.com/stpnlr/omniauth-fluxapp.git'
 gem 'material_icons'
 gem 'foundation-icons-sass-rails'
+gem 'entypo-rails'
 gem 'jquery-minicolors-rails'

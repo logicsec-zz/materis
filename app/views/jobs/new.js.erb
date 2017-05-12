@@ -1,4 +1,4 @@
-$('.pane3').html("<%= escape_javascript(render :partial => 'oauth_applications/show') %>")
+$('.pane3').html("<%= escape_javascript(render :partial => 'projects/form',:locals=>{:project=>@project}) %>")
 $(document).foundation({
     tab: {
         callback: function (tab) {

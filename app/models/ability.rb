@@ -2,9 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-    user ||= User.new # guest user (not logged in)
+    user ||= User.new
 
     alias_action :new, :edit, :create, :read, :update, :destroy, :to => :crud
     alias_action :new, :edit, :create, :read, :update, :to => :cru
@@ -13,16 +11,16 @@ class Ability
       can :manage, :all
     elsif user.manager?
       can :manage, :all
-      can :manage, :oauth_applications
     elsif user.employee?
       can [:edit,:update], Project, :id => user.project_ids
-      can [:edit,:update], Team, :id => user.project_ids
       can :index, Team
-      can :manage, Team, :project => {:id=>user.project_ids}
+      can :index, Job
+      can :manage, Team, :leads => {:user_id=>user.id}
       can [:edit,:update], User, :id=>[user.id]+user.user_ids
 
       can :read, Project
       can :read, Team
+      can :read, Job
 
       can :destroy, Okr do |okr|
         user.user_ids.include?(okr.user_id)
@@ -42,8 +40,6 @@ class Ability
       can :read, Task do |task|
         task.id.nil? || task.user_id == user.id || task.user_ids.include?(user.id) || user.project_ids.include?(task.project_id) || user.team_ids.include?(task.team_id)
       end
-
-      #can :read, :all
     else
       #can :read, :all
     end

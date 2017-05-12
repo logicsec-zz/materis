@@ -1,0 +1,322 @@
+
+.dashboard-card.course-id-1 .dashboard-card-background-color {
+  background-color: #80ACE9;
+}
+
+.dashboard-card-assignment-icon:before {
+  background-color: rgba(128, 172, 233, 0.4);
+}
+
+.dashboard-card.course-id-2 .dashboard-card-background-color {
+  background-color: #68CF8C;
+}
+
+.dashboard-card.course-id-4 .dashboard-card-background-color {
+  background-color: #ED7070;
+}
+
+.dashboard-card-group-heading {
+  margin: 0;
+  color: #566265;
+}
+
+.dashboard-card-container {
+  font-size: 0;
+}
+
+.dashboard-card,
+.dashboard-card * {
+  box-sizing: border-box;
+}
+
+.dashboard-card {
+  width: 100%;
+  min-width: 300px;
+  border-radius: 5px;
+  background-color: white;
+  text-align: center;
+  height: 183px;
+  position: relative;
+  display: inline-block;
+  -webkit-transition: -webkit-transform .2s ease-in, box-shadow .1s ease-in;
+  transition: transform .2s ease-in, box-shadow .1s ease-in;
+  box-shadow: 0px 2px 2px #dfe6f0;
+}
+
+@media (max-width: 340px) {
+  .dashboard-card {
+    margin: 20px calc(50% - 150px);
+  }
+}
+
+@media (min-width: 700px) {
+  .dashboard-card {
+    width: calc(50% - 41px);
+  }
+}
+
+@media (min-width: 1040px) {
+  .dashboard-card {
+    width: 100%;
+  }
+}
+
+
+/* dashboard-card shadow */
+
+.dashboard-card:hover {
+  box-shadow: 0px 5px 10px #dfe6f0;
+}
+
+
+/* header, footer, and body */
+
+.dashboard-card-header,
+.dashboard-card-footer,
+.dashboard-card-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 10px 20px;
+  overflow: hidden;
+}
+
+.dashboard-card-header {
+  top: 0;
+  height: 50px;
+  text-align: left;
+}
+
+.dashboard-card-footer {
+  bottom: 0;
+  height: 50px;
+  border-radius: 0 0 5px 5px;
+  background-color: #F4F6F8;
+}
+
+.dashboard-card-body {
+  top: 50px;
+  bottom: 50px;
+}
+
+.dashboard-card-header > h2,
+.dashboard-card-body > p,
+.dashboard-card-footer > p {
+  margin: 0;
+}
+
+
+/* header content */
+
+.dashboard-card-header > h2 {
+  font-size: 16px;
+  padding: 6px;
+  /* (30 - font-size) / 2 */
+  color: white;
+}
+
+
+/* body content*/
+
+
+/* dashboard-card-info */
+
+.dashboard-card-info {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card-info-element {
+  align-self: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dashboard-card-info-element {
+  width: 30%;
+}
+
+.dashboard-card-info-description {
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  color: #B3BAC1;
+  margin-bottom: 10px;
+}
+.description-left {
+  text-align: left;
+}
+
+.dashboard-card-info-value {
+  color: #576366;
+  font-weight: bold;
+  font-size: 30px;
+  height: 37px;
+  vertical-align: bottom;
+}
+
+.dashboard-card-info-assignment-level,
+.dashboard-card-info-deadline {
+  color: white;
+  background-color: #B3BAC1;
+  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  /* align horizontal */
+  align-items: center;
+  /* align vertical */
+}
+
+.dashboard-card-info-assignment-level {
+  width: 40px;
+  height: 40px;
+  line-height: 30px;
+  padding-top: 2px;
+}
+
+.dashboard-card-info-deadline {
+  font-size: 12px;
+  padding: 6px 10px;
+  margin-bottom: 4px;
+  vertical-align: middle;
+}
+
+
+/* delimiter */
+
+.dashboard-card-body-delimiter {
+  background-color: #EDEFF1;
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  position: absolute;
+  left: calc(50% - 20px);
+}
+
+
+/* tags */
+
+.dashboard-card-tags {
+  height: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card-tag {
+  background-color: #BDC5CD;
+  align-self: center;
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 4px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  font-size: 12px;
+}
+
+
+/* assignment type content */
+
+.dashboard-card-assignment-icon {
+  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: 20px;
+  left: calc(50% - 40px);
+}
+
+.dashboard-card-assignment-icon:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.dashboard-card-assignment-text {
+  height: 40%;
+  font-size: 14px;
+  line-height: 18px;
+  color: #a6b0b2;
+  position: absolute;
+  top: 60%;
+  left: 20px;
+  right: 20px;
+}
+
+.ml-page-checks:after,
+.ml-cross-check:after {
+  content: "";
+  background: url("https://cdn0.iconfinder.com/data/icons/outline-business/512/file.png");
+  background-size: 50px;
+  width: 48px;
+  height: 49px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+
+/* progress bar */
+
+.dashboard-card-progress-bar {
+  background-color: #DFE4E9;
+  height: 8px;
+  display: block;
+  margin: 11px 0;
+  position: relative;
+}
+
+.dashboard-card-progress-bar-status {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+}
+
+
+/* footer content */
+
+.dashboard-card-footer-text {
+  display: inline-block;
+  color: #576366;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.dashboard-card-footer-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  color: white;
+  font-size: 14px;
+  padding: 2px 0;
+  margin: 2px 5px 2px 0;
+}
+
+.ml-checkmark:after {
+  content: "✔";
+}
+.right-border {
+  border-right: 1px solid rgba(120, 130, 140, 0.13) !important;
+}
+.card-padding {
+  padding: 1% !important;
+}

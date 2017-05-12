@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-
   extend FriendlyId
   friendly_id :employee_code
 
   mount_uploader :image, ImageUploader
+
   has_many :project_managers, dependent: :destroy
   has_many :projects, :through => :project_managers
   has_many :team_members, dependent: :destroy
@@ -18,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :reporting_managers, dependent: :destroy
   has_many :work_logs
   has_many :okrs
+  has_many :jobs
   has_many :user_oauth_applications
   has_many :oauth_applications, :through => :user_oauth_applications
   has_many :tasks #authored ones
@@ -30,6 +29,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2, :fluxapp] #, :registerable
+
   scope :active, -> { where(is_deleted: false) }
   scope :by_name, -> { order("users.name ASC") }
   scope :manager_user, -> {where("role in (?)",["admin","Manager"])}

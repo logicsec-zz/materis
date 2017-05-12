@@ -1,38 +1,134 @@
-<%= content_for :pane2 do %>
-    <div class="pane2-meta">
-      <div class="title">Entries</div>
-      <dl class="tabs right" data-tab>
-        <dd class="active clear-tab"><a href="#week">
-          Week
-        </a></dd>
-        <dd class="clear-tab"><a href="#month">
-          Month
-        </a></dd>
-      </dl>
+<div class="col-md-12">
+  <div class="col-md-3 card-padding">
+    <div class="tile-stats tile-primary">
+      <div class="num">
+        <div class="right"><i class="material-icons md-48">content_paste</i></div>
+        <%= current_user.projects.count %>
+      </div>
+      <h3>Projects</h3>
     </div>
-
-    <div class="pane2-content">
-      <div class="data-container">
-        <div class="tabs-content">
-          <div class="content active" id="week">
-            <div class="weekdays-container">
-              <%= render :partial => 'calendar/week' %>
+  </div>
+  <div class="col-md-3 card-padding">
+    <div class="tile-stats tile-red">
+      <div class="num">
+        <div class="right"><i class="material-icons md-48">list</i>
+      </div>
+      <%= current_user.tasks.count %></div>
+      <h3>Total Tasks</h3>
+    </div>
+  </div>
+  <div class="col-md-3 card-padding">
+    <div class="tile-stats tile-purple">
+      <div class="num">
+        <div class="right"><i class="material-icons md-48">cached</i></div>
+        <%= current_user.tasks.pending.count %>
+      </div>
+      <h3>Pending Tasks</h3>
+    </div>
+  </div>
+  <div class="col-md-3 card-padding">
+    <div class="tile-stats tile-cyan">
+      <div class="num">
+        <div class="right"><i class="material-icons md-48">done</i></div>
+        <%= current_user.tasks.completed.count %>
+      </div>
+      <h3>Completed Tasks</h3>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="col-md-4 card-padding">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="project-card mb-0">
+          <div class="card-header text-uppercase text-muted">
+            <div class="row">
+              <div class="col-md-6">Task Name</div>
+              <div class="col-md-3"></div>
+              <div class="col-md-3">Due</div>
             </div>
           </div>
-          <div class="content" id="month">
-            <div class="calendar">
-              <div class="month-calendar-field"></div>
-            </div>
-            <div class="work-logs">
-              <%= render :partial => 'work_logs/logs' %>
-            </div>
-          </div>
+          <% current_user.assignments.each do |task| %>
+            <%= link_to tasks_path(task),:remote=>false do %>
+              <div class="items-list">
+                <div class="il-item">
+                  <div class="media">
+                    <div class="media-body">
+                      <div class="text-muted">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="dashboard-card-info-description"><%= link_to task.name, task_path(task), :style => 'color: #B3BAC1' %></div>
+                          </div>
+                          <div class="col-md-3">
+                          </div>
+                          <div class="col-md-3">
+                            <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
+                              <div class="dashboard-card-info-description"><%= task.time_to_end %></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
-<% end %>
-
-<%= render :partial => 'calendar/day', :locals => {:date => @date, :entries => @entries} %>
+  </div>
+  <div class="col-md-8 card-padding">
+    <div class="project-card mb-0">
+      <div class="card-header text-uppercase text-muted">
+        <div class="row">
+          <div class="col-md-12">Current Projects</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 card-padding">
+          <% @jobs.each do |job| %>
+            <% project_status = (job.tasks.count == 0) ? 0 : ((job.tasks.completed.count.to_f / job.tasks.count.to_f) * 100).to_i %>
+            <% next if project_status == 100 %>
+            <div class="col-md-4">
+              <article class="dashboard-card assignment-dashboard-card course-id-1">
+                <header class="dashboard-card-header" style="background-color: <%= job.color %>">
+                  <h2><i class="material-icons md-34">airplay</i> <%= link_to job.name, job_path(job), :style => 'color: #fff' %></h2>
+                </header>
+                <section class="dashboard-card-body">
+                  <div class="dashboard-card-info">
+                    <div class="dashboard-card-info-element right-border">
+                      <div class="dashboard-card-info-value"><%= job.teams.count %></div>
+                      <div class="dashboard-card-info-description">Teams</div>
+                    </div>
+                    <div class="dashboard-card-info-element right-border">
+                      <div class="dashboard-card-info-value"><%= project_status %></div>
+                      <div class="dashboard-card-info-description">Complete</div>
+                    </div>
+                    <div class="dashboard-card-info-element">
+                      <div class="dashboard-card-info-value"><%= job.tasks.count %></div>
+                      <div class="dashboard-card-info-description">Tasks</div>
+                    </div>
+                  </div>
+                  <p class="dashboard-card-body-delimiter"></p>
+                </section>
+                <footer class="dashboard-card-footer">
+                  <div class="dashboard-card-info-description description-left">Project Progress</div>
+                  <p><span class="dashboard-card-progress-bar"><span class="dashboard-card-progress-bar-status dashboard-card-background-color" data-status="<%= project_status %>"></span></span></p>
+                </footer>
+              </article>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
-    $(document).foundation();
+  $(document).foundation();
+  $(function() {
+      $.each($('.dashboard-card-progress-bar-status'), function (k, v) {
+          $(v).width($(v).attr('data-status') + '%');
+      });
+  });
 </script>

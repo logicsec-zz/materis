@@ -9,6 +9,7 @@
                     <%= f.hidden_field :task_id, :value => @root_task.id if @root_task.present? %>
                     <%= f.hidden_field :team_id, :value => @root_task.team_id if @root_task.present? %>
                     <%= f.hidden_field :project_id, :value => @root_task.project_id if @root_task.present? %>
+                    <%= f.hidden_field :job_id, :value => @root_task.job_id if @root_task.present? %>
                     <%= f.hidden_field :user_id, :value => current_user.id %>
 
                     <%= build_validated_field('task', 'name', 'Title', 'Cannot be blank', '', 'text', @task.name) %>
@@ -17,6 +18,11 @@
                     <% unless @root_task.present? %>
                       <%= f.label :team_id, 'Team' %>
                       <%= select_tag "task[team_id]", grouped_options_for_select(@grouped_teams, @team.id) %>
+                    <% end %>
+
+                    <% unless @root_task.present? %>
+                      <%= f.label :job_id, 'Job' %>
+                      <%= select_tag "task[job_id]", grouped_options_for_select(@grouped_jobs, @job.id) %>
                     <% end %>
 
                     <%= build_validated_field('task', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @task.start_date) %>

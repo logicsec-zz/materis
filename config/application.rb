@@ -5,7 +5,7 @@ require 'rails/all'
 
 Bundler.require(:default, Rails.env)
 
-module Fluxday
+module Materis
   class Application < Rails::Application
     config.to_prepare do
       Doorkeeper::AuthorizationsController.layout "doorkeeper"

@@ -1,0 +1,20 @@
+<div class="pane2-meta">
+  <div class="title">Projects</div>
+</div>
+<div class="pane2-content">
+  <% if can? :create, Job %>
+      <%= link_to 'Create New Project', new_job_path, :remote => false, :class => 'dashed_link transition' %>
+  <% end %>
+  <% jobs.each do |jobs| %>
+      <%= link_to job_path(jobs), :remote => false do %>
+          <div class="project card-transparent transition prj-<%= jobs.id %>">
+            <div class="cols ths">
+              <%= image_tag(jobs.image.icon) %>
+            </div>
+            <div class="cols">
+              <div class="project-title"><%= jobs.name %></div>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+</div>
