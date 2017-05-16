@@ -19,9 +19,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :user_oauth_applications
   has_many :oauth_applications, :through => :user_oauth_applications
-  has_many :tasks #authored ones
-  has_many :objectives, :through => :okrs
-  has_many :key_results, :through => :objectives
+  has_many :tasks
   has_many :assignments, -> { uniq }, :through => :key_results, :source => :tasks
   has_many :managers, :through => :reporting_managers, :class_name => 'User'
   has_many :reporting_employees, :class_name => "ReportingManager", :foreign_key => "manager_id", dependent: :destroy
@@ -67,11 +65,11 @@ class User < ActiveRecord::Base
   end
 
   def assigned_and_written_tasks
-    Task.where(id: (task_ids + assignment_ids).uniq)
+    Task.where(id: (task_ids).uniq)
   end
 
   def watching_tasks
-    Task.active.where("id IN (?) OR team_id IN (?)", (task_ids + assignment_ids).uniq, admin_team_ids)
+    Task.active.where("id IN (?) OR team_id IN (?)", (task_ids).uniq, admin_team_ids)
   end
 
   def log_viewable_tasks

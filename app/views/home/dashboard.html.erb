@@ -82,47 +82,51 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4 card-padding">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="project-card mb-0">
-          <div class="card-header text-uppercase text-muted">
-            <div class="row">
-              <div class="col-md-6">Task Name</div>
-              <div class="col-md-3"></div>
-              <div class="col-md-3">Due</div>
+  <% if !Task.all.empty? %>
+    <div class="col-md-4 card-padding">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="project-card mb-0">
+            <div class="card-header text-uppercase text-muted">
+              <div class="row">
+                <div class="col-md-6">Task Name</div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">Due</div>
+              </div>
             </div>
-          </div>
-          <% current_user.assignments.each do |task| %>
-            <%= link_to tasks_path(task),:remote=>false do %>
-              <div class="items-list">
-                <div class="il-item">
-                  <div class="media">
-                    <div class="media-body">
-                      <div class="text-muted">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="dashboard-card-info-description"><%= link_to task.name, task_path(task), :style => 'color: #B3BAC1' %></div>
-                          </div>
-                          <div class="col-md-3">
-                          </div>
-                          <div class="col-md-3">
-                            <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
-                              <div class="dashboard-card-info-description"><%= task.time_to_end %></div>
+            <% current_user.teams.each do |team| %>
+              <% team.tasks.each do |task| %>
+                <%= link_to tasks_path(task),:remote=>false do %>
+                  <div class="items-list">
+                    <div class="il-item">
+                      <div class="media">
+                        <div class="media-body">
+                          <div class="text-muted">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="dashboard-card-info-description"><%= link_to task.name, task_path(task), :style => 'color: #B3BAC1' %></div>
+                              </div>
+                              <div class="col-md-3">
+                              </div>
+                              <div class="col-md-3">
+                                <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
+                                  <div class="dashboard-card-info-description"><%= task.time_to_end %></div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 <% if !Task.all.empty? %>
   <div class="col-md-12 card-padding">
@@ -132,7 +136,7 @@
           Project Timelines
         </div>
       </div>
-      <div id="project-timeline" style="width: 100%; height: 300px"></div>
+      <div id="project-timeline" style="width: 100%;"></div>
     </div>
   </div>
 <% end %>
@@ -143,7 +147,6 @@
           $(v).width($(v).attr('data-status') + '%');
       });
   });
-
 
   google.charts.load("current", {packages:["timeline"]});
   google.charts.setOnLoadCallback(drawTimelineChart);

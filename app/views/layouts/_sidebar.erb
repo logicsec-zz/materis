@@ -2,7 +2,7 @@
   <li class="navigation-title">Navigation</li>
   <li><%= link_to raw('<i class="fi-monitor"></i> Dashboard'), root_path, :class => current_class?(root_path) %></li>
   <li>
-    <%= link_to raw("<i class='fi-clipboard-notes'></i> Tasks <span class='details right'>#{current_user.assignments.count}</span>"), tasks_path, :class => current_class?(tasks_path) %>
+    <%= link_to raw("<i class='fi-clipboard-notes'></i> Tasks <span class='details right'>#{current_user.tasks.count}</span>"), tasks_path, :class => current_class?(tasks_path) %>
   </li>
 
   <dl class="accordion report-list" data-accordion>
@@ -52,7 +52,6 @@
 
   <li><%= link_to raw("<i class='fi-torso'></i> Projects"), jobs_path, :class => current_class?(jobs_path) %></li>
   <li><%= link_to raw("<i class='fi-torso'></i> Users"), users_path, :class => current_class?(users_path) %></li>
-  <li><%= link_to raw("<i class='fi-compass'></i> OKR"), okrs_path, :class => current_class?(okrs_path) %></li>
 </ul>
 <ul class="user-links side-nav sidebar-links">
   <% if user_signed_in? %>

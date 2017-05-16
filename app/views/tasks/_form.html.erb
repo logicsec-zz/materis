@@ -36,14 +36,10 @@
                     <div class="priority-selector">
                       <%= build_validated_select('task', 'priority', 'Priority', 'Should select at least one', '', false, @task.priority, ['Low', 'Medium', 'High', 'Showstopper']) %>
                     </div>
-                    <div class="assignees-select">
-                      <%= render :partial => 'teams/members' %>
-                    </div>
                     <br>
                     <br>
                   </div>
                 </div>
-
                 <div class="pane3-padding">
                   <div class="right">
                     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

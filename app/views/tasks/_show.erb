@@ -34,12 +34,6 @@
         </div>
         <div class="row">
           <div class="col-sm-8">
-            <div class="project-code">Assigned To: <span class="date">
-              <% task.users.each_with_index do |u, i| %>
-                  <%= link_to u.name, user_path(u) %>
-                  <%= i+1 != task.users.count ? "," : '' %>
-              <% end %>
-            </span></div>
           </div>
           <div class="col-sm-4">
             <div class="project-code right">

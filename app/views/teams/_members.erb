@@ -1,9 +1,8 @@
 <div class='form-row assignee_key_results assignee-row'>
-    Assignees
+    Team Members
     <div class="task-assignees">
       <% if @users %>
           <% @users.each do |u| %>
-              <% unless @key_results[u.id].nil? %>
                   <div class="user-krs">
                     <div class="assignee-title"><%= u.name %></div>
                     <% @key_results[u.id].each do |kr| %>
@@ -13,7 +12,6 @@
                         </div>
                     <% end %>
                   </div>
-              <% end %>
           <% end %>
       <% end %>
       <% if @key_results.empty? %>

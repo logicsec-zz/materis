@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
+  #load_and_authorize_resource :task, :through => [:team,:task], :shallow => true
 
   # GET /tasks
   # GET /tasks.json
@@ -66,8 +67,6 @@ class TasksController < ApplicationController
     else
       redirect_to root_path, :alert => 'You have no access to a team inorder to assign a task.'
     end
-    @kr_ids = @task.key_result_ids
-    @key_results = @team.key_results.where('key_results.start_date <= ? && key_results.end_date >= ?', @task.end_date, @task.start_date).group_by(&:user_id) if @team
   end
 
   # GET /tasks/1/edit
@@ -94,8 +93,6 @@ class TasksController < ApplicationController
     @users = @team.try(&:members)
     start_date = @task.start_date
     end_date = @task.end_date
-    @kr_ids = @task.key_result_ids
-    @key_results = @team.key_results.where('key_results.start_date <= ? && key_results.end_date >= ?', end_date, start_date).group_by(&:user_id)
   end
 
   # POST /tasks
