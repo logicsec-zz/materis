@@ -71,7 +71,9 @@ Materis::Application.routes.draw do
     resources :teams
   end
 
-  resources :jobs, :path => 'projects'
+  resources :jobs, :path => 'projects' do
+    resources :comments
+  end
 
   resources :users do
     resources :okrs do
@@ -85,11 +87,6 @@ Materis::Application.routes.draw do
     end
   end
 
-  #namespace :api do
-  #  namespace :v1 do
-  #    get '/me' => "credentials#me"
-  #  end
-  #end
   namespace :api do
     namespace :v1 do
       get '/me' => "credentials#me"

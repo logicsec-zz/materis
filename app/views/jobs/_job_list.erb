@@ -6,7 +6,7 @@
       <%= link_to 'Create New Project', new_job_path, :remote => false, :class => 'dashed_link transition' %>
   <% end %>
   <% jobs.each do |jobs| %>
-      <%= link_to job_path(jobs), :remote => false do %>
+      <%= link_to job_path(jobs), :remote => true do %>
           <div class="project card-transparent transition prj-<%= jobs.id %>">
             <div class="cols ths">
               <%= image_tag(jobs.image.icon) %>

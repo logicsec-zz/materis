@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :teams
 
-  validates_presence_of :name, :code
+  validates_presence_of :name, :code, :color, :team_ids
   validates_uniqueness_of :code
 
   mount_uploader :image, ImageUploader
@@ -21,7 +21,6 @@ class Job < ActiveRecord::Base
     return self.tasks.pending.count
   end
   def time_to_end
-    #(self.end_date.to_date - Date.today).to_i
     project_status = (self.tasks.count == 0) ? 0 : ((self.tasks.completed.count.to_f / self.tasks.count.to_f) * 100).to_i
 
     if end_date.to_date == Date.today

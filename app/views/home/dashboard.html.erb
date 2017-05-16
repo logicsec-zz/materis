@@ -37,6 +37,51 @@
   </div>
 </div>
 <div class="col-md-12">
+  <div class="col-md-8 card-padding">
+    <div class="project-card mb-0">
+      <div class="card-header text-uppercase text-muted">
+        <div class="row">
+          <div class="col-md-12">Current Projects</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 card-padding">
+          <% @jobs.each do |job| %>
+              <% project_status = (job.tasks.count == 0) ? 0 : ((job.tasks.completed.count.to_f / job.tasks.count.to_f) * 100).to_i %>
+              <% next if project_status == 100 %>
+              <div class="col-md-4">
+                <article class="dashboard-card assignment-dashboard-card course-id-1">
+                  <header class="dashboard-card-header" style="background-color: <%= job.color %>">
+                    <h2><i class="material-icons md-34">airplay</i> <%= link_to job.name, job_path(job), :style => 'color: #fff' %></h2>
+                  </header>
+                  <section class="dashboard-card-body">
+                    <div class="dashboard-card-info">
+                      <div class="dashboard-card-info-element right-border">
+                        <div class="dashboard-card-info-value"><%= job.teams.count %></div>
+                        <div class="dashboard-card-info-description">Teams</div>
+                      </div>
+                      <div class="dashboard-card-info-element right-border">
+                        <div class="dashboard-card-info-value"><%= project_status %></div>
+                        <div class="dashboard-card-info-description">Complete</div>
+                      </div>
+                      <div class="dashboard-card-info-element">
+                        <div class="dashboard-card-info-value"><%= job.tasks.count %></div>
+                        <div class="dashboard-card-info-description">Tasks</div>
+                      </div>
+                    </div>
+                    <p class="dashboard-card-body-delimiter"></p>
+                  </section>
+                  <footer class="dashboard-card-footer">
+                    <div class="dashboard-card-info-description description-left">Project Progress</div>
+                    <p><span class="dashboard-card-progress-bar"><span class="dashboard-card-progress-bar-status dashboard-card-background-color" data-status="<%= project_status %>"></span></span></p>
+                  </footer>
+                </article>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="col-md-4 card-padding">
     <div class="row">
       <div class="col-md-12">
@@ -78,52 +123,19 @@
       </div>
     </div>
   </div>
-  <div class="col-md-8 card-padding">
+</div>
+<% if !Task.all.empty? %>
+  <div class="col-md-12 card-padding">
     <div class="project-card mb-0">
       <div class="card-header text-uppercase text-muted">
         <div class="row">
-          <div class="col-md-12">Current Projects</div>
+          Project Timelines
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 card-padding">
-          <% @jobs.each do |job| %>
-            <% project_status = (job.tasks.count == 0) ? 0 : ((job.tasks.completed.count.to_f / job.tasks.count.to_f) * 100).to_i %>
-            <% next if project_status == 100 %>
-            <div class="col-md-4">
-              <article class="dashboard-card assignment-dashboard-card course-id-1">
-                <header class="dashboard-card-header" style="background-color: <%= job.color %>">
-                  <h2><i class="material-icons md-34">airplay</i> <%= link_to job.name, job_path(job), :style => 'color: #fff' %></h2>
-                </header>
-                <section class="dashboard-card-body">
-                  <div class="dashboard-card-info">
-                    <div class="dashboard-card-info-element right-border">
-                      <div class="dashboard-card-info-value"><%= job.teams.count %></div>
-                      <div class="dashboard-card-info-description">Teams</div>
-                    </div>
-                    <div class="dashboard-card-info-element right-border">
-                      <div class="dashboard-card-info-value"><%= project_status %></div>
-                      <div class="dashboard-card-info-description">Complete</div>
-                    </div>
-                    <div class="dashboard-card-info-element">
-                      <div class="dashboard-card-info-value"><%= job.tasks.count %></div>
-                      <div class="dashboard-card-info-description">Tasks</div>
-                    </div>
-                  </div>
-                  <p class="dashboard-card-body-delimiter"></p>
-                </section>
-                <footer class="dashboard-card-footer">
-                  <div class="dashboard-card-info-description description-left">Project Progress</div>
-                  <p><span class="dashboard-card-progress-bar"><span class="dashboard-card-progress-bar-status dashboard-card-background-color" data-status="<%= project_status %>"></span></span></p>
-                </footer>
-              </article>
-            </div>
-          <% end %>
-        </div>
-      </div>
+      <div id="project-timeline" style="width: 100%; height: 300px"></div>
     </div>
   </div>
-</div>
+<% end %>
 <script type="text/javascript">
   $(document).foundation();
   $(function() {
@@ -131,4 +143,33 @@
           $(v).width($(v).attr('data-status') + '%');
       });
   });
+
+
+  google.charts.load("current", {packages:["timeline"]});
+  google.charts.setOnLoadCallback(drawTimelineChart);
+  function drawTimelineChart() {
+      var container = document.getElementById('project-timeline');
+      var chart = new google.visualization.Timeline(container);
+      var dataTable = new google.visualization.DataTable();
+      dataTable.addColumn({ type: 'string', id: 'Project' });
+      dataTable.addColumn({ type: 'string', id: 'Name' });
+      dataTable.addColumn({ type: 'date', id: 'Start' });
+      dataTable.addColumn({ type: 'date', id: 'End' });
+      dataTable.addRows([
+          <% @jobs.each do |job| %>
+            <% job.tasks.each do |task| %>
+              [ '<%= job.name %>', '<%= task.name %>', new Date('<%= task.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= task.end_date.strftime("%Y-%m-%d") %>') ],
+            <% end %>
+          <% end %>
+      ]);
+
+      chart.draw(dataTable,
+          {
+              hAxis: {
+                  format: 'yyyy-MM-dd'
+              },
+              timeline: { colorByRowLabel: false }
+          }
+      );
+  }
 </script>

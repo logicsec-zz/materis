@@ -113,10 +113,78 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="project-card">
+          <div class="card-header text-uppercase"><%= job.name %> Timeline</div>
+          <div class="items-list">
+            <div class="il-item">
+              <a class="text-black" href="#">
+                <div class="media">
+                  <div class="media-body">
+                    <div id="chart_div"></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
     $('.team-card').removeClass('active')
     $('.team-<%= job.id %>').addClass('active')
+
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawGanttChart);
+
+    function daysToMilliseconds(days) {
+        return days * 24 * 60 * 60 * 1000;
+    }
+
+    function drawGanttChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Task ID');
+        data.addColumn('string', 'Task Name');
+        data.addColumn('date', 'Start Date');
+        data.addColumn('date', 'End Date');
+        data.addColumn('number', 'Duration');
+        data.addColumn('number', 'Percent Complete');
+        data.addColumn('string', 'Dependencies');
+
+        data.addRows([
+            <% project_status = (@job.tasks.count == 0) ? 0 : ((@job.tasks.completed.count.to_f / @job.tasks.count.to_f) * 100).to_i %>
+            ['<%= job.name %>', '<%= job.name %>',
+                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null,  <%= project_status %>,  null],
+            ['1', 'Milestone 1',
+                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null, 25, null],
+            ['2', 'Milestone 2',
+                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null, 0, null],
+            ['3', 'Milestone 3',
+                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null, 0, null],
+            ['4', 'Milestone 4',
+                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null, 0, null]
+        ]);
+
+        var options = {
+            height: 275,
+            gantt: {
+                criticalPathEnabled: false, // Critical path arrows will be the same as other arrows.
+                arrow: {
+                    angle: 100,
+                    width: 5,
+                    color: 'green',
+                    radius: 0
+                }
+            }
+
+        };
+
+        var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+    }
+
 </script>

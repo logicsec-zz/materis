@@ -55,3 +55,5 @@ gem 'material_icons'
 gem 'foundation-icons-sass-rails'
 gem 'entypo-rails'
 gem 'jquery-minicolors-rails'
+gem "chartkick"
+gem 'groupdate'

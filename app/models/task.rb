@@ -1,5 +1,4 @@
 class Task < ActiveRecord::Base
-
   extend FriendlyId
   friendly_id :id
 
@@ -27,7 +26,6 @@ class Task < ActiveRecord::Base
   scope :pending, -> { where(status: 'active') }
   scope :completed, -> { where(status: 'completed') }
   scope :searchable_for_user, lambda { |user| where("id in (?) OR id in (?) OR project_id in (?)  OR team_id in (?)", user.task_ids, user.assignment_ids, user.project_ids, user.team_ids) }
-
 
   def updatable_by_user(user)
     return true if user_ids.include?(user.id)

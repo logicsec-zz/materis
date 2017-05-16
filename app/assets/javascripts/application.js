@@ -20,6 +20,8 @@
 //= require cocoon
 //= require jquery.minicolors
 //= require jquery.minicolors.simple_form
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

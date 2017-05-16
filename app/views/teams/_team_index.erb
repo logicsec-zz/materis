@@ -4,7 +4,7 @@
 <% assignables = Team.assignable_by_user(current_user).collect(&:id) %>
 <div class="pane2-content">
   <% if can? :create, Team %>
-      <%= link_to 'Create New Team', new_team_path, :remote => false, :class => 'dashed_link transition' %>
+      <%= link_to 'Create New Team', new_team_path, :remote => true, :class => 'dashed_link transition' %>
   <% end %>
   <% teams.unarchived.each do |team| %>
       <%= link_to team_path(team), :remote => false do %>
