@@ -16,8 +16,10 @@
                 <%= build_validated_field('milestone', 'name', 'Name', 'Cannot be blank', '[a-zA-Z]+', 'text',@milestone.name) %>
                 <%= f.label :job_id, 'Team' %>
                 <%= select_tag "milestone[job_id]", grouped_options_for_select(@grouped_jobs, @job.id) %>
-                <%= build_validated_field('milestone', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @milestone.start_date) %>
-                <%= build_validated_field('milestone', 'end_date', 'End Date', 'Cannot be blank', '', 'date_field', @milestone.end_date) %>
+                <%= f.label :start_date, 'Start Date' %>
+                <%= text_field_tag("milestone[start_date]", @milestone.start_date, :class => '', :required => '', :pattern => '', :placeholder => 'Start Date', :id => 'start_date') %>
+                <%= f.label :end_date, 'End Date' %>
+                <%= text_field_tag("milestone[end_date]", @milestone.end_date, :class => '', :required => '', :pattern => '', :placeholder => 'End Date', :id => 'end_date') %>
               </div>
             </div>
           </div>
@@ -36,4 +38,16 @@
 
 <script type="text/javascript">
     window.location = '#pane3'
+    $(document).ready(function () {
+        $('#start_date').datetimepicker({
+            timepicker:false,
+            formatDate:'Y-m-d',
+            minDate:'<%= @job.start_date.strftime("%Y-%m-%d") %>'
+        });
+        $('#end_date').datetimepicker({
+            timepicker:false,
+            formatDate:'Y/m/d',
+            minDate:'<%= @job.end_date.strftime("%Y-%m-%d") %>'
+        });
+    });
 </script>

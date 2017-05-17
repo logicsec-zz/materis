@@ -41,13 +41,14 @@ class TasksController < ApplicationController
       @task.team_id = @team.id if @team.present?
       @task.project_id = @team.project_id if @team.present?
     end
-    @teams = Team.assignable_by_user(current_user).includes(:project)
 
     if params[:project_id].present?
       @job = Job.find(params[:project_id])
       @milestone = @job.milestones.first
       @task.job_id = @job.id if @job.present?
       @milestones = @job.milestones
+      @milestone = Milestone.find(params[:milestone_id])
+      @teams = @job.teams
     end
 
     @grouped_milestones = @milestones.inject({}) do |options, milestone|

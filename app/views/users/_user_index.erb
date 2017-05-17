@@ -3,7 +3,7 @@
 </div>
 <div class="pane2-content">
   <% if can? :manage, User %>
-      <%= link_to 'Add user', new_user_path, :remote => false, :class => 'dashed_link transition' %>
+      <%= link_to 'Add user', new_user_path, :remote => true, :class => 'dashed_link transition' %>
   <% end %>
   <% @users.each do |user| %>
       <div class="user-min">

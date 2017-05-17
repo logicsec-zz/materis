@@ -22,16 +22,18 @@
 
                     <% unless @root_task.present? %>
                       <%= f.label :job_id, 'Job' %>
-                      <%= select_tag "task[job_id]", grouped_options_for_select(@grouped_jobs, @job.id) %>
+                      <%= select_tag "task[job_id]", options_for_select([[@job.name, @job.id]]), :disabled=>true %>
                     <% end %>
 
                     <% unless @root_task.present? %>
                       <%= f.label :milestone_id, 'Milestone' %>
-                      <%= select_tag "task[milestone_id]", grouped_options_for_select(@grouped_milestones, @milestone.id) %>
+                      <%= select_tag "task[milestone_id]", options_for_select([[@milestone.name, @milestone.id]]), :id => "select_milestone", :disabled=>true %>
                     <% end %>
 
-                    <%= build_validated_field('task', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @task.start_date) %>
-                    <%= build_validated_field('task', 'end_date', 'End Date', 'Cannot be blank', '', 'date_field', @task.end_date) %>
+                    <%= f.label :start_date, 'Start Date' %>
+                    <%= text_field_tag("task[start_date]", @task.start_date, :class => '', :required => '', :pattern => '', :placeholder => 'Start Date', :id => 'start_date') %>
+                    <%= f.label :end_date, 'End Date' %>
+                    <%= text_field_tag("task[end_date]", @task.end_date, :class => '', :required => '', :pattern => '', :placeholder => 'End Date', :id => 'end_date') %>
 
                     <% if @task.status == 'completed' %>
                       <%= f.label :status, 'Status' %>
@@ -66,32 +68,21 @@
 <script type="text/javascript">
     window.location = '#pane3'
     $('select').not('.select_add').select2({'width': '100%'});
-    $('.team-selector').on("change", function () {
-        load_assignees()
-    });
 
 
-    $('.date-input').datetimepicker({
-        onSelectDate: function () {
-            load_assignees();
-        }
-    });
+    $(document).ready(function () {
 
-    $('#task_team_id').bind("change", function () {
-        load_assignees()
+        $('#start_date').datetimepicker({
+            timepicker:false,
+            formatDate:'Y-m-d',
+            minDate:'<%= @milestone.start_date.strftime("%Y-%m-%d") %>',
+            maxDate:'<%= @milestone.end_date.strftime("%Y-%m-%d") %>'
+        });
+        $('#end_date').datetimepicker({
+            timepicker:false,
+            formatDate:'Y-m-d',
+            minDate:'<%= @milestone.start_date.strftime("%Y-%m-%d") %>',
+            maxDate:'<%= @milestone.end_date.strftime("%Y-%m-%d") %>'
+        });
     });
-    $('#task_start_date').bind("input", function () {
-        load_assignees()
-    });
-    $('#task_end_date').bind("input", function () {
-        load_assignees()
-    });
-    function load_assignees() {
-        if ($('#task_team_id').val() == '' || $('#task_start_date').val() == '' || $('#task_end_date').val() == '') {
-            $('.assignees-select').html('Choose end date, start date and team for the task');
-        } else {
-            $('.assignees-select').html('satisfied');
-            $.get('/teams/get_member_list?team_id=' + $('#task_team_id').val() + '&start_date=' + $('#task_start_date').val() + '&end_date=' + $('#task_end_date').val() + "&task_id=<%= @task.try(&:id) %>")
-        }
-    }
 </script>

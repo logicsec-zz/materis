@@ -71,27 +71,16 @@
               <dd><a href="#user-teams">
                 Departments <span class="tag tag-teams"><%= @user.projects.count %></span>
               </a></dd>
-              <dd><a href="#user-okrs">
-                OKRS <span class="tag tag-teams"><%= @user.okrs.count %></span>
-              </a></dd>
             </dl>
 
             <div class="tabs-content">
               <div class="content active" id="user-projects">
-                <%= render :partial => 'teams/team_list', :locals => {:teams => @teams.present? ? @teams : @user.teams} %>
+                <% if !@teams.blank? %>
+                  <%= render :partial => 'teams/team_list', :locals => {:teams => @teams.present? ? @teams : @user.teams} %>
+                <% end %>
               </div>
               <div class="content" id="user-teams">
                 <%= render :partial => 'projects/list_projects', :locals => {:projects => @projects.present? ? @projects : @user.projects} %>
-              </div>
-              <div class="content" id="user-okrs">
-                <div class="card-header text-uppercase">
-                  <b>
-                    <% if can? :cru, Okr, @user %>
-                        <%= link_to 'New OKR', new_user_okr_path(@user), :class => "dashed_link transition new-team" %>
-                    <% end %>
-                  </b>
-                </div>
-                <%= render :partial => 'okrs/okr_list', :locals => {:okrs => @user.okrs}%>
               </div>
             </div>
           </div>

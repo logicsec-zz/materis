@@ -26,7 +26,6 @@
 
 $(function(){ $(document).foundation(); });
 
-
 function infiniteScroll() {
     if ($('.scroll-loop').size() > 0) {
         return $('.scroll2watch').on('scroll', function (e) {
@@ -40,6 +39,8 @@ function infiniteScroll() {
         });
     }
 }
+
+
 
 function copyTextToClipboard(text) {
     var textArea = document.createElement("textarea");

@@ -104,11 +104,6 @@
               </div>
               <div class="content" id="job-task-list">
                 <div class="card-header text-uppercase">
-                  <b>
-                    <% if can? :edit, @task %>
-                      <%= link_to 'Add task', new_task_path(:project_id => job.id), :remote => false, :class => 'dashed_link transition new-team' %>
-                    <% end %>
-                  </b>
                 </div>
                 <%= render :partial => 'tasks/task_job_list', :locals => {:tasks => @job.tasks} %>
               </div>
@@ -132,7 +127,6 @@
                     <% if can? :edit, @job %>
                       <%= link_to 'Add Milestone', new_milestone_path(:job_id => job.id), :remote => false, :class => 'dashed_link transition new-team' %>
                     <% end %>
-
                     <div id="chart_div"></div>
                   </div>
                 </div>
