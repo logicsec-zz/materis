@@ -1,9 +1,8 @@
 <div class="card-header text-uppercase text-muted">
   <div class="row">
     <div class="col-md-4">Task Name</div>
-    <div class="col-md-3">Team</div>
-    <div class="col-md-3">Assignees</div>
-    <div class="col-md-2">Due</div>
+    <div class="col-md-5">Team</div>
+    <div class="col-md-3">Due</div>
   </div>
 </div>
 <% tasks.active.each do |task| %>
@@ -21,15 +20,10 @@
                       <b>Created By:</b> <%= task.user.name %>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-5">
                     <span class="tag tag-teams" style="background-color: <%= task.team.color %>"><%= task.team.name %></span>
                   </div>
                   <div class="col-md-3">
-                    <% task.users.each_with_index do |u, i| %>
-                        <%= link_to image_tag(u.image.icon, :class => 'rounded_pic pic20 '), user_path(u) %>
-                    <% end %>
-                  </div>
-                  <div class="col-md-2">
                     <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
                       <%= task.time_to_end %>
                     </div>

@@ -1,0 +1,30 @@
+<div class="card-header text-uppercase text-muted">
+  <div class="row">
+    <div class="col-md-7">Milestone Name</div>
+  </div>
+</div>
+<% milestones.each do |milestone| %>
+  <div class="items-list">
+    <div class="il-item">
+      <div class="media">
+        <div class="media-body">
+          <div class="text-muted">
+            <div class="row">
+              <div class="col-md-7">
+                <%= milestone.name.capitalize %>
+              </div>
+              <div class="col-sm-5">
+                <span class="media-heading right">
+                  <% if can? :edit, @job %>
+                    <%= link_to "Edit", edit_milestone_path(milestone), :class => 'button success' %>
+                    <%= link_to "Delete", milestone_path(milestone),:method=>:delete, data: { confirm: 'Are you sure you want to delete this milestone?' }, :class => 'button alert' %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

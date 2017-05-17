@@ -94,7 +94,7 @@
                 <div class="col-md-3">Due</div>
               </div>
             </div>
-            <% current_user.teams.each do |team| %>
+            <% current_user.teams.unarchived.uniq.each do |team| %>
               <% team.tasks.each do |task| %>
                 <%= link_to tasks_path(task),:remote=>false do %>
                   <div class="items-list">
@@ -171,7 +171,8 @@
               hAxis: {
                   format: 'yyyy-MM-dd'
               },
-              timeline: { colorByRowLabel: false }
+              timeline: { colorByRowLabel: false },
+              colors: ['#355c7d', '#6c5b7b', '#83af9b', '#f4543c', '#b167c4']
           }
       );
   }

@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   has_many :teams, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :milestones, dependent: :destroy
   has_many :project_managers, dependent: :destroy
   has_many :users,:through=>:project_managers,:after_remove => :update_user_project_count
   has_many :team_members, :through => :teams, dependent: :destroy

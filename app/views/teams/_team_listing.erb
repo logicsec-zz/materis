@@ -21,9 +21,7 @@
                   </a>
                   <ul id="drop<%= team.id %>" data-dropdown-content class="f-dropdown">
                     <li>
-                      <% if assignables.include?(team.id) %>
-                          <%= link_to 'Add task', new_task_path(:team_id => team.id), :remote => false %>
-                      <% end %>
+                      <%= link_to 'Add task', new_task_path(:team_id => team.id), :remote => false %>
                     </li>
                   </ul>
                 </span>

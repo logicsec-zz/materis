@@ -30,7 +30,7 @@ class Ability
       end
 
       can :read, Task do |task|
-        task.id.nil? || task.user_id == user.id || task.user_ids.include?(user.id) || user.project_ids.include?(task.project_id) || user.team_ids.include?(task.team_id)
+        task.id.nil? || task.user_id == user.id || user.project_ids.include?(task.project_id) || user.team_ids.include?(task.team_id)
       end
     else
       #can :read, :all

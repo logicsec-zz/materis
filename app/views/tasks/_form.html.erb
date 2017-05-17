@@ -25,6 +25,11 @@
                       <%= select_tag "task[job_id]", grouped_options_for_select(@grouped_jobs, @job.id) %>
                     <% end %>
 
+                    <% unless @root_task.present? %>
+                      <%= f.label :milestone_id, 'Milestone' %>
+                      <%= select_tag "task[milestone_id]", grouped_options_for_select(@grouped_milestones, @milestone.id) %>
+                    <% end %>
+
                     <%= build_validated_field('task', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @task.start_date) %>
                     <%= build_validated_field('task', 'end_date', 'End Date', 'Cannot be blank', '', 'date_field', @task.end_date) %>
 

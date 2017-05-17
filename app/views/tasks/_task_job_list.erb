@@ -1,7 +1,8 @@
 <div class="card-header text-uppercase text-muted">
   <div class="row">
-    <div class="col-md-7">Task Name</div>
+    <div class="col-md-4">Task Name</div>
     <div class="col-md-3">Team</div>
+    <div class="col-md-3">Milestone</div>
     <div class="col-md-2">Due</div>
   </div>
 </div>
@@ -13,7 +14,7 @@
             <div class="media-body">
               <div class="text-muted">
                 <div class="row">
-                  <div class="col-md-7">
+                  <div class="col-md-4">
                     <%= link_to task.name.capitalize, task_path(task) %>
                     <br>
                     <div class="date">
@@ -22,6 +23,9 @@
                   </div>
                   <div class="col-md-3">
                     <span class="tag tag-teams" style="background-color: <%= task.team.color %>"><%= task.team.name %></span>
+                  </div>
+                  <div class="col-md-3">
+                    <%= task.milestone.name %>
                   </div>
                   <div class="col-md-2">
                     <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
