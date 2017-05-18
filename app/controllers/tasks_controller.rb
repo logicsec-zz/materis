@@ -34,6 +34,7 @@ class TasksController < ApplicationController
     @team = @root_task.team if params[:task_id].present?
     @jobs = Job.all
     @task = @root_task.present? ? @root_task.sub_tasks.new : Task.new
+    @tasks = current_user.watching_tasks.pending.paginate(page: params[:page], per_page: 10)
     @task.start_date = Time.now
     @task.end_date = Time.now
     if params[:team_id].present?
@@ -81,6 +82,7 @@ class TasksController < ApplicationController
 
     @jobs = Job.all
     @task.job_id = @job.id if @job.present?
+    @tasks = current_user.watching_tasks.pending.paginate(page: params[:page], per_page: 10)
     @job = Job.find(@task.job_id)
     @milestone = @task.milestone
     @milestones = @job.milestones

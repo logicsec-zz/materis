@@ -1,24 +1,20 @@
 <div class="pane2-meta">
   <div class="title">Teams</div>
 </div>
-<% assignables = Team.assignable_by_user(current_user).collect(&:id) %>
 <div class="pane2-content">
-  <% if can? :create, Team %>
-      <%= link_to 'Create New Team', new_team_path, :remote => true, :class => 'dashed_link transition' %>
-  <% end %>
   <% teams.unarchived.each do |team| %>
-      <%= link_to team_path(team), :remote => false do %>
-        <div class="project card-transparent transition prj-<%= team.id %>">
-          <div class="cols ths">
-            <%= image_tag(team.image.icon) %>
-          </div>
-          <div class="cols">
-            <div class="project-title"><%= team.name %></div>
-            <div class="text">
-              <%= "#{team.members.count} #{'member'.pluralize(team.members.count)}" %>
-            </div>
+    <%= link_to team_path(team), :remote => false do %>
+      <div class="project card-transparent transition prj-<%= team.id %>">
+        <div class="cols ths">
+          <%= image_tag(team.image.icon) %>
+        </div>
+        <div class="cols">
+          <div class="project-title"><%= team.name %></div>
+          <div class="text">
+            <%= "#{team.members.count} #{'member'.pluralize(team.members.count)}" %>
           </div>
         </div>
-      <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>

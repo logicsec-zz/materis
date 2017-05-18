@@ -43,6 +43,7 @@ class TeamsController < ApplicationController
     @users = User.active
     if params[:project_id].present?
       @project = Project.find(params[:project_id])
+      @teams = @project.teams.active
       @team = @project.teams.new
     else
       @team = Team.new
@@ -53,6 +54,7 @@ class TeamsController < ApplicationController
   def edit
     @users = User.active
     @projects = Project.active
+    @teams = Team.for_user(current_user)
   end
 
   # POST /teams
