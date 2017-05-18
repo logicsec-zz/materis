@@ -1,34 +1,28 @@
-<div class="items-list">
-  <% assignables = Team.assignable_by_user(current_user).collect(&:id) %>
-  <% teams.unarchived.each do |team| %>
+<div class="card-header text-uppercase text-muted"></div>
+<% teams.unarchived.each do |team| %>
+    <div class="items-list">
       <div class="il-item">
-        <a class="text-black" href="#">
-          <div class="media">
-            <div class="media-body">
-              <div class="col-sm-1">
-                <%= image_tag(team.image.icon) %>
-              </div>
-              <div class="col-sm-5">
-                <h6 class="media-heading">
-                  <%= link_to team.name, team_path(team), :remote => false, :class => 'grey-link' %>
-                </h6>
-              </div>
-              <div class="col-sm-6">
-                <span class="media-heading right">
-                  <span class="tag tag-teams"><%= team.members_count %> <i class="material-icons">people</i></span>
-                  <a href="#" data-options="align:left" data-dropdown="drop<%= team.id %>" class="dropdown right">
-                    <i class="material-icons md-18">more_vert</i>
-                  </a>
-                  <ul id="drop<%= team.id %>" data-dropdown-content class="f-dropdown">
-                    <li>
-                      <%= link_to 'Add task', new_task_path(:team_id => team.id), :remote => false %>
-                    </li>
-                  </ul>
-                </span>
+        <div class="media">
+          <div class="media-body">
+            <div class="text-muted">
+              <div class="row">
+                <div class="col-sm-1">
+                  <%= image_tag(team.image.icon) %>
+                </div>
+                <div class="col-sm-5">
+                  <h6 class="media-heading">
+                    <%= link_to team.name, team_path(team), :remote => false, :class => 'grey-link' %>
+                  </h6>
+                </div>
+                <div class="col-sm-6">
+                  <span class="media-heading right">
+                    <span class="tag tag-teams"><%= team.members_count %> <i class="material-icons">people</i></span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
-  <% end %>
-</div>
+    </div>
+<% end %>

@@ -21,16 +21,16 @@
                   </a>
                   <ul id="drop1" data-dropdown-content class="f-dropdown">
                     <li>
-                      <%= link_to "Edit", edit_user_path(@user) %>
+                      <i class="fi-pencil"></i> <%= link_to "Edit", edit_user_path(@user) %>
                     </li>
                     <% if @user == current_user %>
                         <li>
-                          <%= link_to "Change password", change_password_users_path %>
+                          <i class="fi-unlock"></i> <%= link_to "Change password", change_password_users_path %>
                         </li>
                     <% end %>
                     <% if current_user.manager? %>
                         <li>
-                          <%= link_to "Delete", user_path(user), :method => :delete, :confirm => 'Are you sure you want to archive this employee?' %>
+                          <i class="fi-x"></i> <%= link_to "Delete", user_path(user), :method => :delete, :confirm => 'Are you sure you want to archive this employee?' %>
                         </li>
                     <% end %>
                   </ul>
@@ -69,7 +69,7 @@
                 Teams <span class="tag tag-teams"><%= @user.teams.count %></span>
               </a></dd>
               <dd><a href="#user-teams">
-                Departments <span class="tag tag-teams"><%= @user.projects.count %></span>
+                Departments <span class="tag tag-teams"><%= @user.joined_projects.count %></span>
               </a></dd>
             </dl>
 
@@ -80,7 +80,7 @@
                 <% end %>
               </div>
               <div class="content" id="user-teams">
-                <%= render :partial => 'projects/list_projects', :locals => {:projects => @projects.present? ? @projects : @user.projects} %>
+                <%= render :partial => 'projects/list_projects', :locals => {:projects => @projects.present? ? @projects : @user.joined_projects} %>
               </div>
             </div>
           </div>

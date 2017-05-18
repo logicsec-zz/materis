@@ -3,7 +3,8 @@
     <div class="col-md-4">Task Name</div>
     <div class="col-md-3">Team</div>
     <div class="col-md-3">Milestone</div>
-    <div class="col-md-2">Due</div>
+    <div class="col-md-1">Due</div>
+    <div class="col-md-1"></div>
   </div>
 </div>
 <% tasks.active.each do |task| %>
@@ -27,10 +28,27 @@
                   <div class="col-md-3">
                     <%= task.milestone.name %>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-1">
                     <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
                       <%= task.time_to_end %>
                     </div>
+                  </div>
+                  <div class="col-md-1">
+                    <span class="media-heading right">
+                      <% if can? :edit, @job %>
+                        <a href="#" data-options="align:left" data-dropdown="taskdrop-<%= task.id %>" aria-controls="drop-<%= task.id %>" aria-expanded="false">
+                          <i class="material-icons md-18">more_vert</i>
+                        </a>
+                        <ul id="taskdrop-<%= task.id %>" data-dropdown-content class="f-dropdown" tabindex="-1">
+                          <li>
+                            <i class="fi-pencil"></i> <%= link_to "Edit Task", edit_task_path(task) %>
+                          </li>
+                          <li>
+                            <i class="fi-x"></i> <%= link_to "Delete Task", task_path(task),:method=>:delete, data: { confirm: 'Are you sure you want to delete this task?' } %>
+                          </li>
+                        </ul>
+                      <% end %>
+                    </span>
                   </div>
                 </div>
               </div>

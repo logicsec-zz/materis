@@ -1,11 +1,9 @@
-  <div class="card-header text-uppercase">
-    <b>
-      <% if can? :edit, @project %>
-        <% if defined? project %>
-            <%= link_to 'New team', new_project_team_path(project), :remote => false, :class => 'dashed_link transition new-team' %>
-        <% end %>
+<b>
+  <% if can? :edit, @project %>
+    <% if defined? project %>
+        <%= link_to 'New team', new_project_team_path(project), :remote => false, :class => 'dashed_link transition new-team' %>
     <% end %>
-    </b>
-  </div>
-  <%= render :partial => 'teams/team_listing', :locals => {:project => @project, :teams => @teams.present? ? @teams : @project.teams}%>
+<% end %>
+</b>
+<%= render :partial => 'teams/team_listing', :locals => {:project => @project, :teams => @teams.present? ? @teams : @project.teams}%>
 

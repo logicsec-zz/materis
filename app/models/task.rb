@@ -6,6 +6,7 @@ class Task < ActiveRecord::Base
   belongs_to :team
   belongs_to :milestone
   belongs_to :project
+  belongs_to :job
   has_many :comments, :as => :source, dependent: :destroy
   has_many :work_logs, dependent: :destroy
 

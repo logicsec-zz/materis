@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.active.by_name
+    @user = @users.first unless @users.empty?
+    @managers = @user.managers
+    @teams = @user.teams
   end
 
   # GET /users/1

@@ -1,10 +1,11 @@
 <div class="card-header text-uppercase"></div>
-<div class="items-list">
 <% projects.each do |project| %>
-      <div class="il-item">
-        <a class="text-black" href="#">
-          <div class="media">
-            <div class="media-body">
+  <div class="items-list">
+    <div class="il-item">
+      <div class="media">
+        <div class="media-body">
+          <div class="text-muted">
+            <div class="row">
               <div class="col-sm-1">
                 <%= image_tag(project.image.icon) %>
               </div>
@@ -15,7 +16,8 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
-  <% end %>
-</div>
+    </div>
+  </div>
+<% end %>

@@ -20,10 +20,10 @@
                   </a>
                   <ul id="drop1" data-dropdown-content class="f-dropdown">
                     <li>
-                      <%= link_to "Edit", edit_job_path(job) %>
+                      <i class="fi-pencil"></i> <%= link_to "Edit", edit_job_path(job) %>
                     </li>
                     <li>
-                      <%= link_to "Delete", job_path(job),:method=>:delete, data: { confirm: 'Are you sure you want to delete this project?' } %>
+                      <i class="fi-x"></i> <%= link_to "Delete", job_path(job),:method=>:delete, data: { confirm: 'Are you sure you want to delete this project?' } %>
                     </li>
                   </ul>
               <% end %>

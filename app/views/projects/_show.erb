@@ -21,21 +21,21 @@
                   </a>
                   <ul id="drop1" data-dropdown-content class="f-dropdown">
                     <li>
-                      <%= link_to "Edit Department", edit_project_path(@project) %>
+                      <i class="fi-pencil"></i> <%= link_to "Edit Department", edit_project_path(@project) %>
                     </li>
                     <li>
-                      <%= link_to "Copy Department URL", '#', :id => 'copy-url' %>
+                      <i class="fi-page-copy"></i> <%= link_to "Copy Department URL", '#', :id => 'copy-url' %>
                     </li>
                     <hr>
                     <li>
                       <% if @project.is_deleted? %>
-                        <%= link_to("Restore Department", project_path(@project, "project[is_deleted]" => 0), :method => :put, data: {confirm: "Are you sure you want to restore this department?"}) %>
+                        <i class="fi-refresh"></i> <%= link_to("Restore Department", project_path(@project, "project[is_deleted]" => 0), :method => :put, data: {confirm: "Are you sure you want to restore this department?"}) %>
                       <% else %>
-                        <%= link_to("Archive Department", project_path(@project, "project[is_deleted]" => 1), :method => :put, data: {confirm: "Are you sure you want to archive this department?"}) %>
+                        <i class="fi-archive"></i> <%= link_to("Archive Department", project_path(@project, "project[is_deleted]" => 1), :method => :put, data: {confirm: "Are you sure you want to archive this department?"}) %>
                       <% end %>
                     </li>
                     <li>
-                      <%= link_to "Delete Department", project_path(@project), :method => :delete, data: {confirm: "Are you sure you want to delete this department?"} %>
+                      <i class="fi-x"></i> <%= link_to "Delete Department", project_path(@project), :method => :delete, data: {confirm: "Are you sure you want to delete this department?"} %>
                     </li>
                   </ul>
               <% end %>
@@ -120,6 +120,7 @@
                 <%= render :partial => 'users/user_list', :locals => {:users => @members.present? ? @members : @project.members} %>
               </div>
               <div class="content" id="project-tasks">
+                <div class="card-header text-uppercase"></div>
                 <%= render :partial => 'tasks/task_project_list', :locals => {:tasks => @project.tasks} %>
               </div>
             </div>

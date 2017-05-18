@@ -233,7 +233,6 @@ body {
 }
 .items-list .il-item {
   position: relative;
-  overflow: hidden;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
@@ -245,7 +244,12 @@ body {
 .items-list .il-item .media-heading {
   margin-top: 4px;
 }
-
+.f-dropdown li a {
+  display: inline-flex !important;
+}
+em, i {
+  padding-left: 12px;
+}
 .items-list .il-item .il-icon {
   position: absolute;
   top: 20px;

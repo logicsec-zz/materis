@@ -71,7 +71,7 @@ class TasksController < ApplicationController
       @users = @team.team_leads
     end
     else
-      redirect_to root_path, :alert => 'You have no access to a team inorder to assign a task.'
+      redirect_to root_path, :alert => 'You have no access to a team in order to assign a task.'
     end
   end
 
@@ -111,9 +111,13 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.project_id = @task.team.project_id if @task.team.present?
+    if params[:project_id].present?
+      @job = Job.find(params[:project_id])
+    end
+
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to @job, notice: 'Task was successfully created.' }
         format.json { render action: 'show', status: :created, location: @task }
       else
         format.html { render action: 'new' }
@@ -125,9 +129,10 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @job = Job.find(@task.job_id)
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to @job, notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

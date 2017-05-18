@@ -22,12 +22,12 @@
 
                     <% unless @root_task.present? %>
                       <%= f.label :job_id, 'Job' %>
-                      <%= select_tag "task[job_id]", options_for_select([[@job.name, @job.id]]), :disabled=>true %>
+                      <%= select_tag "task[job_id]", options_for_select([[@job.name, @job.id]])%>
                     <% end %>
 
                     <% unless @root_task.present? %>
                       <%= f.label :milestone_id, 'Milestone' %>
-                      <%= select_tag "task[milestone_id]", options_for_select([[@milestone.name, @milestone.id]]), :id => "select_milestone", :disabled=>true %>
+                      <%= select_tag "task[milestone_id]", options_for_select([[@milestone.name, @milestone.id]]), :id => "select_milestone"%>
                     <% end %>
 
                     <%= f.label :start_date, 'Start Date' %>

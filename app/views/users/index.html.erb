@@ -1,6 +1,11 @@
 <%= content_for :pane2 do %>
     <%= render :partial => 'users/user_index' %>
 <% end %>
+<%= content_for :pane3 do %>
+    <% if @user.present? %>
+        <%= render :partial => 'users/show', :locals => {:user => @user} %>
+    <% end %>
+<% end %>
 <script type="text/javascript">
     window.location = '#pane2'
 </script>

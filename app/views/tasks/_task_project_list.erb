@@ -1,7 +1,7 @@
 <div class="card-header text-uppercase text-muted">
   <div class="row">
     <div class="col-md-4">Task Name</div>
-    <div class="col-md-5">Team</div>
+    <div class="col-md-5">Project</div>
     <div class="col-md-3">Due</div>
   </div>
 </div>
@@ -21,7 +21,7 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <span class="tag tag-teams" style="background-color: <%= task.team.color %>"><%= task.team.name %></span>
+                    <%= task.job.name %>
                   </div>
                   <div class="col-md-3">
                     <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
