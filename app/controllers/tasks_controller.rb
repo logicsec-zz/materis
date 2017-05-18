@@ -111,8 +111,8 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.project_id = @task.team.project_id if @task.team.present?
-    if params[:project_id].present?
-      @job = Job.find(params[:project_id])
+    if task_params[:job_id].present?
+      @job = Job.find(task_params[:job_id])
     end
 
     respond_to do |format|
@@ -144,10 +144,10 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    # @task.update_attribute(:is_deleted, true)
+    @task = Task.find(params[:id])
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url }
+      format.html { redirect_to jobs_url }
       format.json { head :no_content }
     end
   end

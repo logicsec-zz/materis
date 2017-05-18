@@ -28,7 +28,7 @@
                         <i class="fi-pencil"></i> <%= link_to "Edit Milestone", edit_milestone_path(milestone) %>
                       </li>
                       <li>
-                        <i class="fi-x"></i> <%= link_to "Delete Milestone", milestone_path(milestone),:method=>:delete, data: { confirm: 'Are you sure you want to delete this milestone?' } %>
+                        <i class="fi-x"></i> <%= link_to "Delete Milestone", milestone_path(milestone),:method=>:delete, data: { confirm: 'Are you sure you want to delete this milestone? This will also delete any associated tasks.' } %>
                       </li>
                     </ul>
                   <% end %>

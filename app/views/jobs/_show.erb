@@ -145,12 +145,7 @@
     google.charts.load('current', {'packages':['gantt']});
     google.charts.setOnLoadCallback(drawGanttChart);
 
-    function daysToMilliseconds(days) {
-        return days * 24 * 60 * 60 * 1000;
-    }
-
     function drawGanttChart() {
-
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Task ID');
         data.addColumn('string', 'Task Name');
@@ -159,7 +154,6 @@
         data.addColumn('number', 'Duration');
         data.addColumn('number', 'Percent Complete');
         data.addColumn('string', 'Dependencies');
-
         data.addRows([
             <% project_status = (@job.tasks.count == 0) ? 0 : ((@job.tasks.completed.count.to_f / @job.tasks.count.to_f) * 100).to_i %>
             ['<%= job.name %>', '<%= job.name %>',
@@ -174,19 +168,11 @@
         var options = {
             height: 275,
             gantt: {
-                criticalPathEnabled: false, // Critical path arrows will be the same as other arrows.
-                arrow: {
-                    angle: 100,
-                    width: 5,
-                    color: 'green',
-                    radius: 0
-                }
+                criticalPathEnabled: true
             }
-
         };
 
         var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-
         chart.draw(data, options);
     }
 
