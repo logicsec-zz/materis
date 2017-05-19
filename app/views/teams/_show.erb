@@ -1,4 +1,3 @@
-<% assignables = Team.assignable_by_user(current_user).collect(&:id) %>
 <div class="pane3-padding team-show">
   <div class="row">
     <div class="col-sm-3">
@@ -20,6 +19,9 @@
                     <i class="material-icons md-18">more_vert</i>
                   </a>
                   <ul id="drop1" data-dropdown-content class="f-dropdown">
+                    <li>
+                      <i class="fi-torso"></i> <%= link_to 'Add members', team_add_members_path(team)%>
+                    </li>
                     <li>
                       <i class="fi-pencil"></i> <%= link_to "Edit", edit_team_path(team) %>
                     </li>
@@ -52,7 +54,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="project-card mb-0">
+        <div class="project-card">
           <div class="data-container">
             <dl class="tabs" data-tab>
               <dd><a href="#team-members">
@@ -67,13 +69,7 @@
             </dl>
             <div class="tabs-content">
               <div class="content active" id="team-members">
-                <div class="card-header text-uppercase">
-                  <b>
-                    <% if can? :edit, @team %>
-                      <%= link_to 'Add members', team_add_members_path(team), :remote => false, :class => 'dashed_link transition new-team' %>
-                    <% end %>
-                  </b>
-                </div>
+                <div class="card-header text-uppercase"></div>
                 <%= render :partial => 'users/user_list', :locals => {:users => @members.present? ? @members : team.members} %>
               </div>
               <div class="content" id="team-leads">

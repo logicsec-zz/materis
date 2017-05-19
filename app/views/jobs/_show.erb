@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="project-card mb-0">
+        <div class="project-card">
           <div class="data-container">
             <dl class="tabs" data-tab>
               <dd><a href="#job-team-list">
@@ -108,25 +108,29 @@
                 <%= render :partial => 'tasks/task_job_list', :locals => {:tasks => @job.tasks} %>
               </div>
               <div class="content" id="job-milestone-list">
-                <div class="card-header text-uppercase">
-                </div>
+                <div class="card-header text-uppercase"></div>
                 <%= render :partial => 'milestones/milestone_list', :locals => {:milestones => @job.milestones} %>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="project-card">
-          <div class="card-header text-uppercase"><%= job.name %> Timeline</div>
+          <div class="card-header">
+            <%= job.name %> Timeline
+            <div class="right">
+              <% if can? :edit, @job %>
+                  <%= link_to raw('<span class="fi-plus"></span> Add Milestone'), new_milestone_path(:job_id => job.id), :remote => false, :class => 'tag-milestone' %>
+              <% end %>
+            </div>
+          </div>
           <div class="items-list">
             <div class="il-item">
               <a class="text-black" href="#">
                 <div class="media">
                   <div class="media-body">
-                    <% if can? :edit, @job %>
-                      <%= link_to 'Add Milestone', new_milestone_path(:job_id => job.id), :remote => false, :class => 'dashed_link transition new-team' %>
-                    <% end %>
                     <div id="chart_div"></div>
                   </div>
                 </div>
@@ -165,16 +169,21 @@
             <% end %>
         ]);
 
+        var trackHeight = 40;
         var options = {
-            height: 275,
+            height: data.getNumberOfRows() * trackHeight,
             gantt: {
-                criticalPathEnabled: false
+                criticalPathEnabled: false,
+                barHeight: 15,
+                barCornerRadius: 0,
+                labelStyle: {
+                    fontSize: 12,
+                    color: '#ffffff'
+                }
             }
-
         };
 
         var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-
         chart.draw(data, options);
     }
 </script>

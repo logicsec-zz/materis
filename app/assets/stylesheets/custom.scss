@@ -362,6 +362,21 @@ em, i {
 .tag-managers {
   background-color: #f44236;
 }
+.tag-milestone {
+  display: initial;
+  padding: .3em .3em;
+  font-size: 90%;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  background-color: #008cba;
+}
+.tag-milestone:hover {
+  color: rgba(255,255,255, 0.8);
+}
 .tag {
   padding: 0.2em 0.4em 0.3em;
   font-size: 80%;
@@ -372,7 +387,6 @@ em, i {
   display: inline-block;
   padding: .25em .4em;
   font-size: 75%;
-  font-weight: 700;
   line-height: 1;
   color: #fff;
   text-align: center;
