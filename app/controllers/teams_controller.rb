@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
       @project = Project.find(params[:project_id])
       @teams = @project.teams.active
     else
-      @teams = Team.for_user(current_user)
+      @teams = Team.all
     end
     @team = @teams.first unless @teams.empty?
     @team_leads = @team.team_leads unless @team.team_leads.empty?
