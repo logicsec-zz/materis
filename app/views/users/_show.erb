@@ -52,7 +52,7 @@
                   <div class="media-body">
                     <h6 class="media-heading">
                       <% @managers.each do |manager| %>
-                          <%= link_to manager.name, user_path(manager) %>
+                          <%= link_to image_tag(manager.image.icon, :class => 'rounded_pic pic48'), user_path(manager) %>
                       <% end %></h6>
                   </div>
                 </div>
