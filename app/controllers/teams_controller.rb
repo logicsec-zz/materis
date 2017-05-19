@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
       @teams = Team.for_user(current_user)
     end
     @team = @teams.first unless @teams.empty?
-    @team_leads = @team.team_leads
+    @team_leads = @team.team_leads unless @team.team_leads.empty?
     @members = @team.members.by_name
   end
 
