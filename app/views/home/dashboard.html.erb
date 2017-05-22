@@ -164,10 +164,10 @@
           <% end %>
       ]);
 
-      var trackHeight = 40;
+      var trackHeight = 140;
       chart.draw(dataTable,
           {
-              height: chart.getNumberOfRows() * trackHeight,
+              height: dataTable.getNumberOfRows() * trackHeight,
               hAxis: {
                   format: 'yyyy-MM-dd'
               },
