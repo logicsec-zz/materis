@@ -1,5 +1,10 @@
 <div class="pane2-meta">
   <div class="title">Users</div>
+  <div class="right white">
+    <% if can? :create, User %>
+        <%= link_to raw('<span class="fi-plus"></span> Add User'), new_user_path, :remote => false, :class => 'button' %>
+    <% end %>
+  </div>
 </div>
 <div class="pane2-content">
   <% if can? :manage, User %>
