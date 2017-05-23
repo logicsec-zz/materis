@@ -1,23 +1,25 @@
 <div class="pane2-meta">
   <div class="title">Departments</div>
-  <dl class="tabs right" data-tab >
-    <dd class="active clear-tab"><a href="#active">
-      Active
-    </a></dd>
-    <dd class="clear-tab"><a href="#archived">
-      Archived
-    </a></dd>
-  </dl>
+  <% if can? :create, Project %>
+      <%= link_to raw('<span class="fi-plus"></span> Add Department'), new_project_path, :remote => false, :class => 'button' %>
+  <% end %>
 </div>
 
 <div class="data-container">
+
+
   <div class="tabs-content">
     <div class="content active" id="active">
       <div class="task-list" id="my-tasks">
         <div class="pane2-content scroll2watch">
-          <% if can? :create, Project %>
-              <%= link_to 'Create New Department', new_project_path, :remote => false, :class => 'dashed_link transition' %>
-          <% end %>
+          <dl class="tabs right" data-tab >
+            <dd class="active clear-tab"><a href="#active">
+              Active
+            </a></dd>
+            <dd class="clear-tab"><a href="#archived">
+              Archived
+            </a></dd>
+          </dl>
           <div id="paginator" class="paginator task-paginator">
             <%= render :partial => 'projects/project_page' %>
           </div>
