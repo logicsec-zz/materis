@@ -1,8 +1,10 @@
 <div class="pane2-meta">
   <div class="title">Departments</div>
-  <% if can? :create, Project %>
-      <%= link_to raw('<span class="fi-plus"></span> Add Department'), new_project_path, :remote => false, :class => 'button' %>
-  <% end %>
+  <div class="right white">
+    <% if can? :create, Project %>
+        <%= link_to raw('<span class="fi-plus"></span> Add Department'), new_project_path, :remote => false, :class => 'button' %>
+    <% end %>
+  </div>
 </div>
 
 <div class="data-container">
