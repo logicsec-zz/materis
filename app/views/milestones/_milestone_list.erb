@@ -1,19 +1,28 @@
 <div class="card-header text-uppercase text-muted">
   <div class="row">
-    <div class="col-md-7">Milestone Name</div>
+    <div class="col-md-4">Milestone Name</div>
+    <div class="col-md-3">Start Date</div>
+    <div class="col-md-3">End Date</div>
+    <div class="col-md-2"></div>
   </div>
 </div>
-<% milestones.each do |milestone| %>
+<% milestones.order(:start_date).each do |milestone| %>
   <div class="items-list">
     <div class="il-item">
       <div class="media">
         <div class="media-body">
           <div class="text-muted">
             <div class="row">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <%= milestone.name.capitalize %>
               </div>
-              <div class="col-sm-5">
+              <div class="col-md-3">
+                <%= milestone.start_date.strftime("%m/%d/%Y") %>
+              </div>
+              <div class="col-md-3">
+                <%= milestone.end_date.strftime("%m/%d/%Y") %>
+              </div>
+              <div class="col-sm-2">
                 <span class="media-heading right">
                   <% if can? :edit, @job %>
                     <a href="#" data-options="align:left" data-dropdown="drop-<%= milestone.id %>" aria-controls="drop-<%= milestone.id %>" aria-expanded="false">
