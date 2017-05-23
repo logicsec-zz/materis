@@ -18,11 +18,6 @@
             <br/>
             <%= link_to raw("(#{user.nickname})"), user_path(user), :remote => true, :class => 'nickname' %>
           </div>
-          <% if can? :edit, user %>
-              <div class="right">
-                <%= link_to 'OKR', user_okrs_path(user) %>
-              </div>
-          <% end %>
         </div>
       </div>
   <% end %>

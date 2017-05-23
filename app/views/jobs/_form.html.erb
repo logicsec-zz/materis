@@ -23,7 +23,7 @@
 
                     <%= f.label :team_ids, 'Teams' %>
                     <%= f.select :team_ids, @teams.map { |x| [x.name, x.id] }, {}, {:multiple => true} %>
-                    <%= f.label 'Department Color' %>
+                    <%= f.label 'Project Color' %>
 
                     <div class="colorPicker">
                       <input <%= if @job.color == '#fe4365' then 'checked="checked"' end %> class="red" id="hat-color-red" name="job[color]" value="#fe4365" type="radio">
