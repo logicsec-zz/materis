@@ -1,5 +1,5 @@
 <% current_user.teams.unarchived.uniq.each do |team| %>
-    <% team.tasks.each do |task| %>
+    <% team.tasks.pending.each do |task| %>
       <%= link_to task_path(task),:remote=>false do %>
           <div class="card transition task-card task task-<%= task.id %>">
             <div class="name">
