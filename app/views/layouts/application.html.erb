@@ -24,18 +24,17 @@
 
           </ul>
           <ul class="left">
-            <%= form_for :search, :url => {:controller => 'home', :action => 'search'}, :method => 'get' do |f| %>
-                <%= f.text_field :keyword, :placeholder => 'Tracker ID or Keyword' %>
-            <% end %>
+            <li><%= link_to raw('<i class="fi-monitor"></i> Dashboard'), root_path %></li>
+            <li><%= link_to raw("<i class='fi-clipboard-notes'></i> Tasks <span class='details right'>#{current_user.tasks.pending.count}</span>"), tasks_path %></li>
+            <li><%= link_to raw("<i class='fi-folder'></i> Departments"), projects_path %></li>
+            <li><%= link_to raw("<i class='fi-torsos-all'></i> Teams"), teams_path %></li>
+            <li><%= link_to raw("<i class='fi-torso'></i> Projects"), jobs_path %></li>
+            <li><%= link_to raw("<i class='fi-torso'></i> Users"), users_path %></li>
           </ul>
         </section>
       </nav>
     </div>
     <div class="row ep-tracker">
-      <div class="large-2 columns pane1 show-for-large-up">
-        <%= render 'layouts/sidebar' %>
-        <%= yield :sidebar %>
-      </div>
       <% if current_page?('/') %>
           <div class="large-10 columns" id="pane3">
             <%= yield :pane3 %>
@@ -43,7 +42,7 @@
           </div>
       <% else %>
           <div class="large-4 columns pane2" id="pane2">
-            <%= yield :pane2%>
+            <%= yield :pane2 %>
           </div>
           <div class="large-6 columns pane3" id="pane3">
             <%= yield :pane3 %>
@@ -51,5 +50,15 @@
           </div>
       <% end %>
     </div>
+    <div class='notifications top-rights alert-area'></div>
+
+    <script type="text/javascript">
+        <% if flash.now[:alert].present?  %>
+        $('.alert-area').notify({message: { text: "<%= flash.now[:alert] %>" }, type: 'tracker-alert',fadeOut: { enabled: true, delay: 10000 }}).show();
+        <% end %>
+        <% if flash.now[:notice].present?  %>
+        $('.alert-area').notify({message: { text: "<%= flash.now[:notice] %>" }, type: 'tracker-alert',fadeOut: { enabled: true, delay: 10000 }}).show();
+        <% end %>
+    </script>
   </body>
 </html>
