@@ -54,6 +54,7 @@
               </div>
             </a>
           </div>
+
           <div class="il-item">
             <a class="text-black" href="#">
               <div class="media">
@@ -64,6 +65,20 @@
               </div>
             </a>
           </div>
+          <div class="card-header text-uppercase">Custom Fields</div>
+          <% job.custom_fields.each do |field| %>
+            <div class="il-item">
+              <a class="text-black" href="#">
+                <div class="media">
+                  <div class="media-body">
+                    <h6 class="media-heading"><%= field.name %></h6>
+                    <span class="text-muted"><%= field.value %></span>
+                  </div>
+                </div>
+              </a>
+            </div>
+              <% end %>
+
         </div>
       </div>
     </div>

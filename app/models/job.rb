@@ -1,8 +1,11 @@
 class Job < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :milestones, dependent: :destroy
+  has_many :custom_fields
   belongs_to :user
   has_and_belongs_to_many :teams
+
+  accepts_nested_attributes_for :custom_fields, reject_if: :all_blank, allow_destroy: true
 
   validates_presence_of :name, :code, :color, :team_ids
   validates_uniqueness_of :code
