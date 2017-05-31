@@ -20,8 +20,9 @@
                   </a>
                   <ul id="drop1" data-dropdown-content class="f-dropdown">
                     <li>
-                      <i class="fi-torso"></i> <%= link_to 'Add members', team_add_members_path(team)%>
+                      <i class="fi-plus"></i> <%= link_to 'Add Members', team_add_members_path(team)%>
                     </li>
+                    <hr>
                     <li>
                       <i class="fi-pencil"></i> <%= link_to "Edit", edit_team_path(team) %>
                     </li>
@@ -69,16 +70,15 @@
             </dl>
             <div class="tabs-content">
               <div class="content active" id="team-members">
-                <div class="card-header text-uppercase"></div>
+                <div class="card-header"></div>
                 <%= render :partial => 'users/user_list', :locals => {:users => @members.present? ? @members : team.members} %>
               </div>
               <div class="content" id="team-leads">
-                <div class="card-header text-uppercase">
-                </div>
+                <div class="card-header"></div>
                 <%= render :partial => 'users/user_list', :locals => {:users => @team_leads.present? ? @team_leads : team.team_leads} %>
               </div>
               <div class="content" id="team-tasks">
-                <div class="card-header text-uppercase"></div>
+                <div class="card-header"></div>
                 <%= render :partial => 'tasks/task_project_list', :locals => {:tasks => @team.tasks} %>
               </div>
             </div>

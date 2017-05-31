@@ -115,11 +115,11 @@
             </dl>
             <div class="tabs-content">
               <div class="content active" id="job-team-list">
+                <div class="card-header"></div>
                 <%= render :partial => 'teams/team_listing', :locals => {:teams => @teams.present? ? @job.teams : @job.teams} %>
               </div>
               <div class="content" id="job-task-list">
-                <div class="card-header text-uppercase">
-                </div>
+                <div class="card-header"></div>
                 <%= render :partial => 'tasks/task_job_list', :locals => {:tasks => @job.tasks} %>
               </div>
               <div class="content" id="job-milestone-list">
