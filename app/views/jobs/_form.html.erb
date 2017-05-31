@@ -64,7 +64,7 @@
     <div class="right">
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   jobs_path, :class => 'button alert' %>
-      <%= f.submit nil, :class => 'button success', data: {disable_with: "Saving"} %>
+      <%= f.submit ( f.object.new_record? ? "Create Project" : "Update Project"), :class => 'button success', data: {disable_with: "Saving"} %>
     </div>
   </div>
 <% end %>
