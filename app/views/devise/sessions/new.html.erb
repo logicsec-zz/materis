@@ -1,32 +1,94 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <h2 class="login-title">
-      <div class="app-logo-login"></div>
-    </h2>
-    <div class="set">
-      <div class="field">
-        <%= f.email_field :email, autofocus: true, :placeholder => 'Email', :class => 'login-field' %>
+<style>
+  html .login-wrap {
+    position: relative;
+    top: 25%;
+    margin: 0 auto;
+    background: #ecf0f1;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #333;
+    padding: 15px;
+  }
+  html .login-wrap h2 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 2em;
+    margin-top: 10px;
+    color: #34495e;
+  }
+  html .login-wrap .form {
+    padding-top: 20px;
+  }
+  html .login-wrap .form input[type="email"],
+  html .login-wrap .form input[type="password"],
+  html .login-wrap .form button {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 25px;
+    height: 40px;
+    border-radius: 5px;
+    outline: 0;
+    -moz-outline-style: none;
+  }
+  html .login-wrap .form input[type="email"],
+  html .login-wrap .form input[type="password"] {
+    border: 1px solid #bbb;
+    padding: 0 0 0 10px;
+    font-size: 14px;
+  }
+  html .login-wrap .form input[type="email"]:focus,
+  html .login-wrap .form input[type="password"]:focus {
+    border: 1px solid #3498db;
+  }
+  html .login-wrap .form a {
+    text-align: center;
+    font-size: 10px;
+    color: #3498db;
+  }
+  html .login-wrap .form a p {
+    padding-bottom: 10px;
+  }
+  html .login-wrap .form button {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 200;
+    cursor: pointer;
+    transition: box-shadow .4s ease;
+  }
+  html .login-wrap .form button:hover {
+    box-shadow: 1px 1px 5px #555;
+  }
+  html .login-wrap .form button:active {
+    box-shadow: 1px 1px 7px #222;
+  }
+  html .login-wrap:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: -webkit-linear-gradient(left, #27ae60 0%, #27ae60 20%, #8e44ad 20%, #8e44ad 40%, #3498db 40%, #3498db 60%, #e74c3c 60%, #e74c3c 80%, #f1c40f 80%, #f1c40f 100%);
+    background: -moz-linear-gradient(left, #27ae60 0%, #27ae60 20%, #8e44ad 20%, #8e44ad 40%, #3498db 40%, #3498db 60%, #e74c3c 60%, #e74c3c 80%, #f1c40f 80%, #f1c40f 100%);
+    height: 5px;
+    border-radius: 5px 5px 0 0;
+  }
+</style>
+<div class="login-wrap">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <h2 class="login-title">
+        <div class="app-logo-login"></div>
+      </h2>
+      <div class="form">
+        <%= f.email_field :email, autofocus: true, :placeholder => 'Email' %>
+        <%= f.password_field :password, autocomplete: "off", :placeholder => 'Password' %>
+
+        <button class="button">Login</button>
+        <% if devise_mapping.rememberable? -%>
+            <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
+        <% end -%>
       </div>
-
-      <div class="field">
-        <%= f.password_field :password, autocomplete: "off", :placeholder => 'Password', :class => 'login-field' %>
-      </div>
-      <div class="field-login">
-        <button class="btn-login">Login</button>
-      </div>
-    </div>
-
-
-    <% if devise_mapping.rememberable? -%>
-        <div class="remebrance"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-    <% end -%>
-
-    <div class="login-links">
-    <%#= render "devise/shared/links" %>
-    </div>
-
-
-    <hr/>
-
-    <div><%#= f.submit "Sign in" %></div>
-<% end %>
+  <% end %>
+</div>
 
