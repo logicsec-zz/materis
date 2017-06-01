@@ -6,8 +6,6 @@ class Team < ActiveRecord::Base
   has_many :team_members, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :users, :through => :team_members
-  has_many :okrs, :through => :users
-  has_many :key_results, :through => :okrs
   has_many :leads, -> { where role: 'lead' }, class_name: 'TeamMember', dependent: :destroy
   has_many :team_leads, :through => :leads, :source => :user, dependent: :destroy
   has_many :members, -> { uniq }, :through => :team_members, :source => :user, dependent: :destroy

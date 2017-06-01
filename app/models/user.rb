@@ -14,13 +14,8 @@ class User < ActiveRecord::Base
   has_many :joined_projects, :through => :teams, :source => :project
   has_many :comments
   has_many :reporting_managers, dependent: :destroy
-  has_many :work_logs
-  has_many :okrs
   has_many :jobs
-  has_many :user_oauth_applications
-  has_many :oauth_applications, :through => :user_oauth_applications
   has_many :tasks
-  has_many :assignments, -> { uniq }, :through => :key_results, :source => :tasks
   has_many :managers, :through => :reporting_managers, :class_name => 'User'
   has_many :reporting_employees, :class_name => "ReportingManager", :foreign_key => "manager_id", dependent: :destroy
   has_many :users, :through => :reporting_employees, :class_name => 'User', :foreign_key => "user_id"
@@ -76,12 +71,6 @@ class User < ActiveRecord::Base
     else
       Task.active.where("id IN (?) OR team_id IN (?)", (task_ids + assignment_ids).uniq, admin_team_ids)
     end
-  end
-
-  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
-    data = access_token.info
-    user = User.where(:email => data["email"]).first
-    user
   end
 
   def ensure_manager_exists
