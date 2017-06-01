@@ -123,6 +123,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.fetch(:team).permit(:name, :code, :description, :project_id, :members_count, :managers_count, :is_deleted, :pending_tasks, :status, :color, :image, :team_lead_ids => [], :user_ids => [])
+    params.fetch(:team).permit(:name, :code, :description, :project_id, :members_count, :managers_count, :is_deleted, :pending_tasks, :status, :color, :image, :remove_image, :team_lead_ids => [], :user_ids => [])
   end
 end

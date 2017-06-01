@@ -16,6 +16,8 @@
               <%= build_validated_field('user', 'name', 'Name', 'Cannot be blank', '[a-zA-Z]+', 'text', @user.name) %>
               <%= build_validated_field('user', 'nickname', 'Nickname', 'Cannot be blank', '[a-zA-Z]+', 'text', @user.nickname) %>
               <%= build_field('user', 'image', 'Profile picture', 'file', @user.image) %>
+              <%= f.check_box :remove_avatar %>
+              Remove avatar
               <%= build_validated_field('user', 'email', 'Email', '', '', 'text', @user.email) %>
               <%= build_validated_field('user', 'employee_code', 'Employee code', 'Cannot be blank', '[a-zA-Z]+', 'text', @user.employee_code) %>
               <%= build_validated_select('user', 'role', 'Role', 'Should select at least one', '', false, @user.role, [['Employee'], ['Manager']]) %>

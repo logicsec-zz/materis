@@ -12,6 +12,8 @@
                   <%= build_validated_field('team', 'code', 'Code', 'Cannot be blank', '[a-zA-Z]+', 'text', @team.code) %>
                   <%= build_field('team', 'description', 'Description', 'text_area', @team.description) %>
                   <%= build_field('team', 'image', 'Image', 'file',@team.image) %>
+                  <%= f.check_box :remove_image %>
+                  Remove Image<br>
                   <%= f.label :project_id, "Department" %>
                   <%= f.select :project_id, @projects.map { |x| [x.name, x.id] } %>
                   <%= f.label :team_lead_ids, 'Project leads' %>

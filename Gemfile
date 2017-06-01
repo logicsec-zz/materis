@@ -39,3 +39,7 @@ gem 'jquery-minicolors-rails'
 gem "chartkick"
 gem 'groupdate'
 gem 'rails_12factor', group: :production
+
+gem "fog-google"
+gem "google-api-client", "> 0.8.5", "< 0.9"
+gem "mime-types"
