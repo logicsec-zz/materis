@@ -14,8 +14,6 @@ class TeamsController < ApplicationController
       @teams = Team.all
     end
     @team = @teams.first unless @teams.empty?
-    @team_leads = @team.team_leads unless @team.team_leads.empty?
-    @members = @team.members.by_name
   end
 
   # GET /teams/1
