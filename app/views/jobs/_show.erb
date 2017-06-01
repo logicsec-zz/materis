@@ -32,53 +32,43 @@
         </div>
       </div>
       <div class="project-card">
-        <div class="card-header text-uppercase">Stats</div>
         <div class="items-list">
-          <div class="il-item">
-            <a class="text-black" href="#">
-              <div class="media">
-                <div class="media-body">
-                  <h6 class="media-heading">Total Tasks</h6>
-                  <span class="text-muted"><%= job.total_tasks %> task(s) have been created</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="il-item">
-            <a class="text-black" href="#">
-              <div class="media">
-                <div class="media-body">
-                  <h6 class="media-heading">Completed Tasks</h6>
-                  <span class="text-muted"><%= job.completed_tasks %> task(s) have been completed</span>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="il-item">
-            <a class="text-black" href="#">
-              <div class="media">
-                <div class="media-body">
-                  <h6 class="media-heading">Incomplete Tasks</h6>
-                  <span class="text-muted">There are <%= job.incomplete_tasks %> incomplete tasks</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="card-header text-uppercase">Custom Fields</div>
+          <div class="card-header text-uppercase">Project Fields</div>
           <% job.custom_fields.each do |field| %>
             <div class="il-item">
-              <a class="text-black" href="#">
-                <div class="media">
-                  <div class="media-body">
-                    <h6 class="media-heading"><%= field.name %></h6>
-                    <span class="text-muted"><%= field.value %></span>
-                  </div>
+              <div class="media">
+                <div class="media-body">
+                  <h6 class="media-heading"><%= field.name %></h6>
+                  <span class="text-muted"><%= field.value %></span>
                 </div>
-              </a>
+              </div>
             </div>
-              <% end %>
-
+          <% end %>
+          <div class="card-header text-uppercase">Task Stats</div>
+          <div class="il-item">
+            <div class="media">
+              <div class="media-body">
+                <h6 class="media-heading">Total Tasks</h6>
+                <span class="text-muted"><%= job.total_tasks %> task(s) have been created</span>
+              </div>
+            </div>
+          </div>
+          <div class="il-item">
+            <div class="media">
+              <div class="media-body">
+                <h6 class="media-heading">Completed Tasks</h6>
+                <span class="text-muted"><%= job.completed_tasks %> task(s) have been completed</span>
+              </div>
+            </div>
+          </div>
+          <div class="il-item">
+            <div class="media">
+              <div class="media-body">
+                <h6 class="media-heading">Incomplete Tasks</h6>
+                <span class="text-muted">There are <%= job.incomplete_tasks %> incomplete tasks</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -88,13 +78,11 @@
           <div class="card-header text-uppercase">Description</div>
           <div class="items-list">
             <div class="il-item">
-              <a class="text-black" href="#">
-                <div class="media">
-                  <div class="media-body">
-                    <h6 class="media-heading"><%= job.description %></h6>
-                  </div>
+              <div class="media">
+                <div class="media-body">
+                  <h6 class="media-heading"><%= job.description %></h6>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -143,13 +131,11 @@
           </div>
           <div class="items-list">
             <div class="il-item">
-              <a class="text-black" href="#">
-                <div class="media">
-                  <div class="media-body">
-                    <div id="chart_div"></div>
-                  </div>
+              <div class="media">
+                <div class="media-body">
+                  <div id="chart_div"></div>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>

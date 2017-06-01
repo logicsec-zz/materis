@@ -1,10 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:300');
 @font-face {
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 600;
-  src: local('Nunito Sans SemiBold'), local('NunitoSans-SemiBold'), url(https://fonts.gstatic.com/s/nunitosans/v2/XvilrNtBQKRMeiqSPzEFHV2umOyRU7PgRiv8DXcgJjk.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  src: local('Nunito Sans SemiBold'), local('NunitoSans-SemiBold'), url(https://fonts.gstatic.com/s/nunitosans/v2/XvilrNtBQKRMeiqSPzEFHVf4y_3s5bcYyyLIFUSWYUU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v2/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
+  unicode-range: U+02BC, U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200B-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
 }
 
 .large-2 {
@@ -203,6 +208,21 @@ body {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
 }
+.project-list-title{
+  font-size: 1.0rem;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #818a91 !important;
+}
+.project-list-status{
+  font-size: 1.0rem;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #43b968 !important;
+}
+.project-list-date{
+  font-size: 1.0rem;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #818a91 !important;
+}
 .project-code{
   color: #818a91 !important;
   font-size: 13px;
@@ -295,6 +315,7 @@ em, i {
 .card-transparent{
   background-color: #fff;
   border-left: 3px solid #009c9c !important;
+  padding: 2px !important;
 }
 .dashed_link {
   color: #fff !important;
@@ -567,5 +588,20 @@ div.square {
   padding-top: 10px;
 }
 .white {
+  color: white;
+}
+.vertical-align {
+  display: flex;
+  align-items: center;
+  min-height: 50px !important;
+}
+button.completed, .button.completed {
+  background-color: #43ac6a;
+  border-color: #368a55;
+  color: white;
+}
+button.active, .button.active {
+  background: #6C5B7B;
+  border-color: #cf2a0e;
   color: white;
 }

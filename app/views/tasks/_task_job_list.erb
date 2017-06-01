@@ -16,7 +16,7 @@
               <div class="text-muted">
                 <div class="row">
                   <div class="col-md-4">
-                    <%= link_to task.name.capitalize, task_path(task) %>
+                    <%= link_to task.name.capitalize, task_path(task), :style => 'color: #43b968' %>
                     <br>
                     <div class="date">
                       <b>Created By:</b> <%= task.user.name %>

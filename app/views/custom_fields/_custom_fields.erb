@@ -1,0 +1,18 @@
+<div class="nested-fields">
+  <% if f.object.name %>
+    <div class="col-lg-10">
+      <%= f.label f.object.name %>
+      <%= f.text_field :value %>
+    </div>
+  <% else %>
+    <div class="col-lg-5">
+      <%= f.text_field :name, :placeholder => 'Enter the name for your new field' %>
+    </div>
+    <div class="col-lg-5">
+      <%= f.text_field :value, :placeholder => 'Enter the value for your new field' %>
+    </div>
+  <% end %>
+  <div class="col-lg-2 vertical-align">
+    <%= link_to_remove_association raw('<span class="fi-x"></span>'), f, :class => 'button alert' %>
+  </div>
+</div>

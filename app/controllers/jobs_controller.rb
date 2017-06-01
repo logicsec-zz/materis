@@ -66,6 +66,6 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.fetch(:job).permit(:name, :code, :description, :is_deleted, :color, :image, :start_date, :end_date, :team_ids => [], custom_fields_attributes: [:id, :name, :value, :_destroy])
+    params.fetch(:job).permit(:name, :code, :description, :is_deleted, :color, :image, :start_date, :end_date, :status, :team_ids => [], custom_fields_attributes: [:id, :name, :value, :_destroy])
   end
 end

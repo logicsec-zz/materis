@@ -1,58 +1,68 @@
 <%= form_for @job, :html => {:class => 'form-horizontal', :multipart => true, :data => {:abide => true}} do |f| %>
   <div class="row">
-    <div class="col-md-12">
-      <div class="pane3-padding">
-        <div class="project-card">
-          <div class="card-block">
-            <div class="form-content form-below">
-              <% if @job.errors.any? %>
-                <div id="error_explanation">
-                  <% @job.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                  <% end %>
-                  </ul>
+    <div class="col-lg-12">
+      <div class="col-lg-12">
+        <div class="pane3-padding">
+          <div class="project-card">
+            <div class="card-block">
+              <div class="form-content form-below">
+                <% if @job.errors.any? %>
+                    <div id="error_explanation">
+                      <% @job.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                <% end %>
+                <%= build_validated_field('job', 'name', 'Title', 'Cannot be blank', '[a-zA-Z]+', 'text',@job.name) %>
+                <%= build_validated_field('job', 'code', 'Code', 'Cannot be blank', '[a-zA-Z]+', 'text',@job.code) %>
+                <%= build_field('job', 'description', 'Description', 'text_area',@job.description) %>
+                <%= build_field('job', 'image', 'Image', 'file',@job.image) %>
+
+                <%= build_validated_field('job', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @job.start_date) %>
+                <%= build_validated_field('job', 'end_date', 'End Date', 'Cannot be blank', '', 'date_field', @job.end_date) %>
+
+                <%= f.label :team_ids, 'Teams' %>
+                <%= f.select :team_ids, @teams.map { |x| [x.name, x.id] }, {}, {:multiple => true} %>
+
+                <%= f.label :status, 'Status' %>
+                <%= select_tag('job[status]', options_for_select([['Active', 'active'], ['Completed', 'completed']], @job.status)) %>
+
+                <%= f.label 'Project Color' %>
+                <div class="colorPicker">
+                  <input <%= if @job.color == '#fe4365' then 'checked="checked"' end %> class="red" id="hat-color-red" name="job[color]" value="#fe4365" type="radio">
+                  <label class="red" for="hat-color-red"></label>
+
+                  <input <%= if @job.color == '#83af9b' then 'checked="checked"' end %> class="green" id="hat-color-green" name="job[color]" value="#83af9b" type="radio">
+                  <label class="green" for="hat-color-green"></label>
+
+                  <input <%= if @job.color == '#355c7d' then 'checked="checked"' end %> class="blue" id="hat-color-blue" name="job[color]" value="#355c7d" type="radio">
+                  <label class="blue" for="hat-color-blue"></label>
+
+                  <input <%= if @job.color == '#6c5b7b'  then 'checked="checked"' end %> class="violet" id="hat-color-violet" name="job[color]" value="#6c5b7b" type="radio">
+                  <label class="violet" for="hat-color-violet"></label>
+
+                  <input <%= if @job.color == '#363636' then 'checked="checked"' end %> class="gray" id="hat-color-gray" name="job[color]" value="#363636" type="radio">
+                  <label class="gray" for="hat-color-gray"></label>
                 </div>
-              <% end %>
-              <%= build_validated_field('job', 'name', 'Title', 'Cannot be blank', '[a-zA-Z]+', 'text',@job.name) %>
-              <%= build_validated_field('job', 'code', 'Code', 'Cannot be blank', '[a-zA-Z]+', 'text',@job.code) %>
-              <%= build_field('job', 'description', 'Description', 'text_area',@job.description) %>
-              <%= build_field('job', 'image', 'Image', 'file',@job.image) %>
-
-              <%= build_validated_field('job', 'start_date', 'Start Date', 'Cannot be blank', '', 'date_field', @job.start_date) %>
-              <%= build_validated_field('job', 'end_date', 'End Date', 'Cannot be blank', '', 'date_field', @job.end_date) %>
-
-              <%= f.label :team_ids, 'Teams' %>
-              <%= f.select :team_ids, @teams.map { |x| [x.name, x.id] }, {}, {:multiple => true} %>
-              <%= f.label 'Project Color' %>
-              <div class="colorPicker">
-                <input <%= if @job.color == '#fe4365' then 'checked="checked"' end %> class="red" id="hat-color-red" name="job[color]" value="#fe4365" type="radio">
-                <label class="red" for="hat-color-red"></label>
-
-                <input <%= if @job.color == '#83af9b' then 'checked="checked"' end %> class="green" id="hat-color-green" name="job[color]" value="#83af9b" type="radio">
-                <label class="green" for="hat-color-green"></label>
-
-                <input <%= if @job.color == '#355c7d' then 'checked="checked"' end %> class="blue" id="hat-color-blue" name="job[color]" value="#355c7d" type="radio">
-                <label class="blue" for="hat-color-blue"></label>
-
-                <input <%= if @job.color == '#6c5b7b'  then 'checked="checked"' end %> class="violet" id="hat-color-violet" name="job[color]" value="#6c5b7b" type="radio">
-                <label class="violet" for="hat-color-violet"></label>
-
-                <input <%= if @job.color == '#363636' then 'checked="checked"' end %> class="gray" id="hat-color-gray" name="job[color]" value="#363636" type="radio">
-                <label class="gray" for="hat-color-gray"></label>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="pane3-padding card-padding">
-        <%= f.label "Custom Fields" %>
-        <div class="project-card">
-          <div class="card-block">
-            <%= f.fields_for :custom_fields do |field| %>
-              <%= render 'jobs/custom_fields', f: field %>
-            <% end %>
-            <div class="row">
-            <%= link_to_add_association raw('<span class="fi-plus"></span> Add New Field'), f, :custom_fields, :partial => 'jobs/custom_fields', :class => 'button clearfix' %>
+      <div class="col-lg-12">
+        <div class="pane3-padding">
+          <div class="project-card">
+            <div class="card-header text-uppercase">Project Fields</div>
+            <div class="card-block">
+              <div class="form-content form-below">
+                <%= f.fields_for :custom_fields do |field| %>
+                    <%= render 'custom_fields/custom_fields', f: field %>
+                <% end %>
+                <div class="col-lg-12">
+                  <%= link_to_add_association raw('<span class="fi-plus"></span> New Field'), f, :custom_fields, :partial => 'custom_fields/custom_fields', :class => 'button' %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
