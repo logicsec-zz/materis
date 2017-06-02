@@ -11,18 +11,19 @@
   src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v2/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
   unicode-range: U+02BC, U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200B-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
 }
-
-.large-2 {
-  width: 14% !important;
-}
-.large-4 {
-  width: 22% !important;
-}
-.large-6 {
-  width: 77% !important;
-}
-.large-10 {
-  width: 100% !important;
+@media only screen and (min-width: 64.063em) {
+  .large-2 {
+    width: 14% !important;
+  }
+  .large-4 {
+    width: 22% !important;
+  }
+  .large-6 {
+    width: 76% !important;
+  }
+  .large-10 {
+    width: 100% !important;
+  }
 }
 .sidebar-links.side-nav li a {
   color: #ffffff !important;
@@ -53,9 +54,9 @@
 }
 .details{
   display: inline-block;
-  min-width: 10px;
+  min-width: 1.0em;
   padding: 3px 7px;
-  font-size: 12px;
+  font-size: 1.6em;
   font-weight: 700;
   line-height: 1;
   color: #fff;
@@ -63,7 +64,7 @@
   white-space: nowrap;
   vertical-align: middle;
   background-color: #777;
-  border-radius: 10px;
+  border-radius: 1.0em;
   text-transform: uppercase;
   padding: 3px 5px;
   margin-top: 1px;
@@ -83,7 +84,7 @@
   box-shadow: 0px 0px 3px 0px #0000004d;
 }
 .sidebar-links.side-nav li a {
-  font-size: 12px  !important;
+  font-size: 1.6em  !important;
 }
 .sidebar-links.side-nav li a {
   padding: 5% 7% !important;
@@ -116,13 +117,13 @@
   background: transparent  !important;
 }
 .accordion.report-list .report-options {
-  padding: 10px !important;
+  padding: 1.0em !important;
   background: #2f3642 !important;
   color: #fff !important;
 }
 .navigation-title {
   font-family: 'Nunito Sans', sans-serif !important;
-  padding: 12px 30px !important;
+  padding: 1.6em 30px !important;
   letter-spacing: .05em !important;
   pointer-events: none !important;
   cursor: default !important;
@@ -161,7 +162,7 @@
   padding: 0px !important;
 }
 .pane3 dl.tabs dd.settings a {
-  padding: 10px !important;
+  padding: 1.0em !important;
 }
 .pane3 dl.tabs dd::after {
   background: transparent  !important;
@@ -178,6 +179,9 @@ body {
 .top-bar-section ul {
   background: transparent !important;
 }
+.top-bar-section .dropdown {
+  background-color: #fff !important;
+}
 .top-set {
   top: 0px !important;
 }
@@ -187,8 +191,8 @@ body {
   border-left: 3px solid #009c9c !important;
 }
 .material-icons, .mi {
-  font-size: 12px;
-  padding-right: 20px;
+  font-size: 1.1em;
+  padding-right: 40px;
 }
 .top-bar-section ul li:hover:not(.has-form) > a {
   background: #f9fafc !important;
@@ -269,7 +273,7 @@ body {
   display: inline-flex !important;
 }
 em, i {
-  padding-left: 12px;
+  padding-left: 1.6em;
 }
 .items-list .il-item .il-icon {
   position: absolute;
@@ -342,7 +346,7 @@ em, i {
 }
 .head-row {
   background-color: white !important;
-  padding: 10px 10px 10px 10px !important;
+  padding: 1.0em 1.0em 1.0em 1.0em !important;
 }
 .weekdays {
   padding: 0px;
@@ -429,20 +433,20 @@ em, i {
   color: #818a91 !important;
 }
 .pic110 {
-  height: 110px;
-  width: 110px;
+  height: 11.0em;
+  width: 11.0em;
 }
 .date {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  font-size: 10px;
+  font-size: 1.0em;
   color: #98a6ad;
   opacity: .5;
 }
 .comment-body {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  font-size: 10px;
+  font-size: 1.0em;
   color: #686868;
 }
 .comments-panel {
@@ -585,7 +589,7 @@ div.square {
   display: inline-flex;
 }
 .col-md-12 > .col-md-4:nth-child(1n+1) {
-  padding-top: 10px;
+  padding-top: 1.0em;
 }
 .white {
   color: white;
@@ -604,4 +608,36 @@ button.active, .button.active {
   background: #6C5B7B;
   border-color: #cf2a0e;
   color: white;
+}
+.top-bar .toggle-topbar a {
+  color: #000 !important;
+}
+.top-bar .toggle-topbar {
+  left: 250px !important;
+}
+meta.foundation-version {
+  font-family:"/5.2.1/"
+}
+meta.foundation-mq-small {
+  font-family:"/only screen and (max-width: 40em)/";
+  width:0em
+}
+meta.foundation-mq-medium {
+  font-family:"/only screen and (min-width:40.063em)/";
+  width:40.063em
+}
+meta.foundation-mq-large {
+  font-family:"/only screen and (min-width:64.063em)/";
+  width:64.063em
+}
+meta.foundation-mq-xlarge {
+  font-family:"/only screen and (min-width:90.063em)/";
+  width:90.063em
+}
+meta.foundation-mq-xxlarge {
+  font-family:"/only screen and (min-width:120.063em)/";
+  width:120.063em
+}
+meta.foundation-data-attribute-namespace {
+  font-family:false
 }

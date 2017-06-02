@@ -11,14 +11,14 @@
   <% jobs.each do |jobs| %>
     <%= link_to job_path(jobs), :remote => true do %>
       <div class="project card-transparent">
-        <div class="col-md-2 vertical-align">
+        <div class="small-2 columns vertical-align">
           <%= image_tag(jobs.image.icon) %>
         </div>
-        <div class="col-md-5 vertical-align">
+        <div class="small-5 columns vertical-align">
           <div class="project-list-title"><%= truncate(jobs.name, :length => 30).titleize  %></div>
         </div>
-        <div class="col-md-2 vertical-align"></div>
-        <div class="col-md-3 vertical-align">
+        <div class="small-2 columns vertical-align"></div>
+        <div class="small-3 columns vertical-align">
           <div class="button <%= jobs.status %>"><%= jobs.status.titleize %></div>
         </div>
       </div>

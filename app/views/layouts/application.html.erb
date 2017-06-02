@@ -2,6 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title><%= content_for?(:title) ? yield(:title) : "Materis" %></title>
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600' rel='stylesheet' type='text/css'>
@@ -18,34 +19,32 @@
           <li class="name">
             <h1><a href="/"><div class="app-logo"></div></a></h1>
           </li>
-          <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
         </ul>
         <section class="top-bar-section">
           <ul class="right">
-            <% if user_signed_in? %>
-                <li class="vertical-align">
-                  <%= image_tag(current_user.image.icon20) %>
-                </li>
-                <li class="vertical-align">
-                  <%= link_to( current_user.name, user_path(current_user)) %>
-                </li>
-                <li class="vertical-align">
-                  <%= link_to(raw("<i class='fi-power'></i> Logout"), destroy_user_session_path, :method => :delete) %>
-                </li>
-            <% else %>
-                <li>
-                  <%= link_to('Login', new_user_session_path) %>
-                </li>
-            <% end %>
+            <%= render :partial=>'layouts/mobile_menu' %>
+            <div class="show-for-large-up">
+              <% if user_signed_in? %>
+                  <li class="vertical-align">
+                    <%= image_tag(current_user.image.icon20) %>
+                  </li>
+                  <li class="vertical-align">
+                    <%= link_to( current_user.name, user_path(current_user)) %>
+                  </li>
+                  <li class="vertical-align">
+                    <%= link_to(raw("<i class='fi-power'></i> Logout"), destroy_user_session_path, :method => :delete) %>
+                  </li>
+              <% else %>
+                  <li>
+                    <%= link_to('Login', new_user_session_path) %>
+                  </li>
+              <% end %>
+            </div>
           </ul>
           <ul class="left">
-            <li><%= link_to raw('<i class="fi-monitor"></i> Dashboard'), root_path %></li>
-            <!--<li><%= link_to raw("<i class='fi-results'></i> Bids"), tasks_path %></li>-->
-            <!--<li><%= link_to raw("<i class='fi-clipboard-notes'></i> Tasks <span class='details right'>#{current_user.tasks.pending.count}</span>"), tasks_path %></li>-->
-            <li><%= link_to raw("<i class='fi-folder'></i> Departments"), projects_path %></li>
-            <li><%= link_to raw("<i class='fi-torsos-all'></i> Teams"), teams_path %></li>
-            <li><%= link_to raw("<i class='fi-shield'></i> Projects"), jobs_path %></li>
-            <li><%= link_to raw("<i class='fi-torso'></i> Users"), users_path %></li>
+            <div class="show-for-large-up">
+              <%= render :partial=>'layouts/pc_menu' %>
+            </div>
           </ul>
         </section>
       </nav>
