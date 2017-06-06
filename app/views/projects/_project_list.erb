@@ -19,7 +19,7 @@
               <%= link_to 'Create New Department', new_project_path, :remote => false, :class => 'dashed_link transition' %>
           <% end %>
           <div id="paginator" class="paginator task-paginator">
-            <%= render :partial => 'projects/project_page' %>
+            <%= render :partial => 'projects/active_projects' %>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
       <div class="task-list" id="my-tasks">
         <div class="pane2-content scroll2watch this">
           <div id="paginator"  class="paginator fin-task-paginator">
-            <%= render :partial => 'projects/archived_project' %>
+            <%= render :partial => 'projects/archived_projects' %>
           </div>
         </div>
       </div>

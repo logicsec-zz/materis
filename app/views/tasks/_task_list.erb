@@ -30,7 +30,7 @@
         <div class="task-list" id="my-tasks">
           <div class="pane2-content scroll2watch this">
             <div id="paginator"  class="paginator fin-task-paginator">
-              <%= render :partial => 'tasks/completed_task_page' %>
+              <%= render :partial => 'tasks/completed_tasks' %>
             </div>
             <div id="infinite-scrolling" class="scroll-loop">
               <%= will_paginate(@fin_tasks, :params => {:controller => "tasks", :action => "completed_index"}) %>

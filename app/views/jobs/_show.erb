@@ -104,7 +104,7 @@
             <div class="tabs-content">
               <div class="content active" id="job-team-list">
                 <div class="card-header"></div>
-                <%= render :partial => 'teams/team_listing', :locals => {:teams => @teams.present? ? @job.teams : @job.teams} %>
+                <%= render :partial => 'teams/team_list', :locals => {:teams => @teams.present? ? @job.teams : @job.teams} %>
               </div>
               <div class="content" id="job-task-list">
                 <div class="card-header"></div>
@@ -162,9 +162,8 @@
         data.addColumn('number', 'Percent Complete');
         data.addColumn('string', 'Dependencies');
         data.addRows([
-            <% project_status = (@job.tasks.count == 0) ? 0 : ((@job.tasks.completed.count.to_f / @job.tasks.count.to_f) * 100).to_i %>
               ['<%= job.name %>', '<%= job.name %>',
-                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null,  <%= project_status %>,  null],
+                new Date('<%= @job.start_date.strftime("%Y-%m-%d") %>'), new Date('<%= @job.end_date.strftime("%Y-%m-%d") %>'), null,  <%= job.project_status %>,  null],
             <% job.milestones.each do |milestone| %>
               <% milestone_status = (milestone.tasks.count == 0) ? 0 : ((milestone.tasks.completed.count.to_f / milestone.tasks.count.to_f) * 100).to_i %>
               ['<%= milestone.name %>', '<%= milestone.name %>',

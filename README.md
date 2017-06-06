@@ -2,8 +2,6 @@
 
 Materis is a task & productivity management application ideal for fast growing startups and small companies. 
 
-Materis is engineered based on the concepts of [OKR](https://en.wikipedia.org/wiki/OKR) - Objectives and Key Results, invented and made popular by John Doerr. OKRs and OKR tools are used today by many companies, including Google, LinkedIn and Twitter
-
 ## You can use Materis for
 - Managing and Tracking OKRs
 - Creating, assigning and tracking tasks
