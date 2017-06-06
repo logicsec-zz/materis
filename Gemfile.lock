@@ -63,6 +63,9 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_lastseenable (0.0.6)
+      devise
+      rails (>= 3.0.4)
     doorkeeper (1.1.0)
       railties (>= 3.1)
     entypo-rails (2.2.3)
@@ -270,6 +273,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.0.0)
   devise (= 3.2.4)
+  devise_lastseenable
   doorkeeper (= 1.1.0)
   entypo-rails
   fog-google

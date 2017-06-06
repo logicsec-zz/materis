@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :reporting_employees, :class_name => "ReportingManager", :foreign_key => "manager_id", dependent: :destroy
   has_many :users, :through => :reporting_employees, :class_name => 'User', :foreign_key => "user_id"
   devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2, :fluxapp] #, :registerable
+         :recoverable, :rememberable, :trackable, :validatable, :lastseenable, :omniauthable, :omniauth_providers => [:google_oauth2, :fluxapp]
   scope :active, -> { where(is_deleted: false) }
   scope :by_name, -> { order("users.name ASC") }
   scope :manager_user, -> {where("role in (?)",["admin","Manager"])}
@@ -85,5 +85,9 @@ class User < ActiveRecord::Base
             return true
           end
       end
+  end
+
+  def seen_at
+    self.last_seen > 5.minutes.ago ? '<span class="tag tag-managers">Offline</span>' : '<span class="tag tag-members">Online</span>'
   end
 end

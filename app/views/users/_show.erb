@@ -39,7 +39,24 @@
           </div>
         </div>
       </div>
-
+      <div class="project-card">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="project-title">
+                <div class="project-code">Status</div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="project-code right">
+              <span class="task-priority priority-">
+                  <%= raw(@user.seen_at) %>
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-sm-9">
       <div class="row">
