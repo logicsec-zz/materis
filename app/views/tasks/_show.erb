@@ -1,55 +1,16 @@
 <div class="row">
-  <div class="col-sm-12 pane3-padding">
-    <% unless task.status == 'completed' %>
-        <a class="button alert right status" data-options="align:left" data-dropdown="contentDrop-<%= task.id %>">
-          <i class="material-icons">done</i>
-        </a>
-    <% else %>
-        <a class="right" data-options="align:left" data-dropdown="contentDrop-<%= task.id %>">
-          <i class="material-icons">done</i>
-        </a>
-    <% end %>
-    <% if task.updatable_by_user(current_user) %>
-        <div id="contentDrop-<%= task.id %>" data-dropdown-content class="f-dropdown content small completion-option completion-area drop-task-<%= task.id %>" style="display: block">
-          <%= render :partial => 'tasks/completion', :locals => {:task => task} %>
-        </div>
-    <% end %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-12">
     <div class="project-card">
       <div class="card-block">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-10">
             <div class="project-title">
               <%= task.name %>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-2">
             <div class="project-title right date">
               <%= task.created_at.strftime('%d %B %Y') %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-8">
-          </div>
-          <div class="col-sm-4">
-            <div class="project-code right">
-              <% if can? :edit, task %>
-                  <a data-options="align:left" data-dropdown="drop-<%= task.id %>" class="dropdown right">
-                    <i class="material-icons md-14">more_vert</i>
-                  </a>
-                  <ul id="drop-<%= task.id %>" data-dropdown-content class="f-dropdown">
-                    <li>
-                      <%= link_to "Edit", edit_task_path(task) %>
-                    </li>
-                    <li>
-                      <%= link_to "Delete", task_path(task), :method => :delete %>
-                    </li>
-                  </ul>
-              <% end %>
             </div>
           </div>
         </div>
@@ -74,7 +35,9 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-8 min-panel-size">
+</div>
+<div class="row">
+  <div class="col-sm-12 min-panel-size">
       <div class="project-card min-panel-size">
         <div class="card-block">
           <div class="row centered">
@@ -118,11 +81,6 @@
     <% if @sub_tasks.present? %>
       <% @sub_tasks.each_with_index do |task, i| %>
           <%= render :partial => 'tasks/sub_task', :locals => {:task => task, :count => i+1} %>
-      <% end %>
-    <% end %>
-    <% unless task.task_id.present? %>
-      <% if can? :manage, task %>
-          <%= link_to 'Add subtask', new_task_path(:task_id => task.id), :class => 'dashed_link transition' %>
       <% end %>
     <% end %>
 

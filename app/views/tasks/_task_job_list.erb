@@ -8,53 +8,59 @@
   </div>
 </div>
 <% tasks.active.each do |task| %>
-  <%= link_to tasks_path(task),:remote=>false do %>
     <div class="items-list">
       <div class="il-item">
-          <div class="media">
-            <div class="media-body">
-              <div class="text-muted">
-                <div class="row">
-                  <div class="col-md-4">
-                    <%= link_to task.name.capitalize, task_path(task), :style => 'color: #43b968' %>
-                    <br>
-                    <div class="date">
-                      <b>Created By:</b> <%= task.user.name %>
-                    </div>
+        <div class="media">
+          <div class="media-body">
+            <div class="text-muted">
+              <div class="row">
+                <div class="col-md-4">
+                  <span style="color: #43b968"><a href="#" data-reveal-id="modal-<%= task.id %>"><%= task.name.capitalize %></a></span>
+                  <br>
+                  <div class="date">
+                    <b>Created By:</b> <%= task.user.name %>
                   </div>
-                  <div class="col-md-3">
-                    <span class="tag tag-teams" style="background-color: <%= task.team.color %>"><%= task.team.name %></span>
+                </div>
+                <div class="col-md-3">
+                  <span class="tag tag-teams" style="background-color: <%= task.team.color %>"><%= task.team.name %></span>
+                </div>
+                <div class="col-md-3">
+                  <%= task.milestone.name %>
+                </div>
+                <div class="col-md-1">
+                  <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
+                    <%= task.time_to_end %>
                   </div>
-                  <div class="col-md-3">
-                    <%= task.milestone.name %>
-                  </div>
-                  <div class="col-md-1">
-                    <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
-                      <%= task.time_to_end %>
-                    </div>
-                  </div>
-                  <div class="col-md-1">
-                    <span class="media-heading right">
-                      <% if can? :edit, @job %>
-                        <a href="#" data-options="align:left" data-dropdown="taskdrop-<%= task.id %>" aria-controls="drop-<%= task.id %>" aria-expanded="false">
-                          <i class="material-icons md-18">more_vert</i>
-                        </a>
-                        <ul id="taskdrop-<%= task.id %>" data-dropdown-content class="f-dropdown" tabindex="-1">
-                          <li>
-                            <i class="fi-pencil"></i> <%= link_to "Edit Task", edit_task_path(task) %>
-                          </li>
-                          <li>
-                            <i class="fi-x"></i> <%= link_to "Delete Task", task_path(task),:method=>:delete, data: { confirm: 'Are you sure you want to delete this task?' } %>
-                          </li>
-                        </ul>
-                      <% end %>
-                    </span>
-                  </div>
+                </div>
+                <div class="col-md-1">
+                  <span class="media-heading right">
+                    <% if can? :edit, @job %>
+                      <a href="#" data-options="align:left" data-dropdown="taskdrop-<%= task.id %>" aria-controls="drop-<%= task.id %>" aria-expanded="false">
+                        <i class="material-icons md-18">more_vert</i>
+                      </a>
+                      <ul id="taskdrop-<%= task.id %>" data-dropdown-content class="f-dropdown" tabindex="-1">
+                        <li>
+                          <i class="fi-plus"></i> <%= link_to 'Add subtask', new_task_path(:task_id => task.id) %>
+                        </li>
+                        <hr>
+                        <li>
+                          <i class="fi-pencil"></i> <%= link_to "Edit Task", edit_task_path(task) %>
+                        </li>
+                        <li>
+                          <i class="fi-x"></i> <%= link_to "Delete Task", task_path(task),:method=>:delete, data: { confirm: 'Are you sure you want to delete this task?' } %>
+                        </li>
+                      </ul>
+                    <% end %>
+                  </span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
-  <% end %>
+    <div id="modal-<%= task.id %>" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <%= render :partial => 'tasks/show', :locals => {:task => task} %>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
 <% end %>
