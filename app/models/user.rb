@@ -87,7 +87,15 @@ class User < ActiveRecord::Base
       end
   end
 
+  def online?
+    updated_at > 10.minutes.ago
+  end
+
   def seen_at
-    self.last_seen > 5.minutes.ago ? '<span class="tag tag-managers">Offline</span>' : '<span class="tag tag-members">Online</span>'
+    if self.online?
+      '<span class="tag tag-members">Online</span>'
+    else
+      '<span class="tag tag-managers">Offline</span>'
+    end
   end
 end
