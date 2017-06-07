@@ -1,10 +1,11 @@
 <div class="card-header text-uppercase text-muted">
   <div class="row">
-    <div class="col-md-4">Task Name</div>
-    <div class="col-md-3">Team</div>
-    <div class="col-md-3">Milestone</div>
-    <div class="col-md-1">Due</div>
-    <div class="col-md-1"></div>
+    <div class="col-sm-4">Task Name</div>
+    <div class="col-sm-2">Team</div>
+    <div class="col-sm-2">Milestone</div>
+    <div class="col-sm-2">Status</div>
+    <div class="col-sm-1">Due</div>
+    <div class="col-sm-1"></div>
   </div>
 </div>
 <% tasks.active.each do |task| %>
@@ -21,11 +22,14 @@
                     <b>Created By:</b> <%= task.user.name %>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <span class="tag tag-teams" style="background-color: <%= task.team.color %>"><%= task.team.name %></span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <%= task.milestone.name %>
+                </div>
+                <div class="col-md-2">
+                  <%= raw(task.task_status) %>
                 </div>
                 <div class="col-md-1">
                   <div class="date end-<%= (task.end_date <= 7.day.from_now && task.end_date >= Date.today) ? 'soon' : 'low' %>">
@@ -39,10 +43,6 @@
                         <i class="material-icons md-18">more_vert</i>
                       </a>
                       <ul id="taskdrop-<%= task.id %>" data-dropdown-content class="f-dropdown" tabindex="-1">
-                        <li>
-                          <i class="fi-plus"></i> <%= link_to 'Add subtask', new_task_path(:task_id => task.id) %>
-                        </li>
-                        <hr>
                         <li>
                           <i class="fi-pencil"></i> <%= link_to "Edit Task", edit_task_path(task) %>
                         </li>

@@ -9,7 +9,10 @@
           <div class="row">
             <div class="col-sm-10">
               <div class="project-title">
-                <%= job.name %>
+                <div class="col-sm-1">
+                  <div style="background-color: <%= job.color %>; height: 10px; width: 10px"></div>
+                </div>
+                <%= truncate(job.name) %>
               </div>
               <div class="project-code"><%= job.code %></div>
             </div>
@@ -118,7 +121,6 @@
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="project-card">
           <div class="card-header">

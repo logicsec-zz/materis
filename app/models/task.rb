@@ -66,4 +66,12 @@ class Task < ActiveRecord::Base
       self.completed_on = nil
     end
   end
+
+  def task_status
+    if self.status == 'completed'
+      '<span class="tag tag-members">Completed</span>'
+    else
+      '<span class="tag tag-managers">Pending</span>'
+    end
+  end
 end

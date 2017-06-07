@@ -35,10 +35,8 @@
                     <%= f.label :end_date, 'End Date' %>
                     <%= text_field_tag("task[end_date]", @task.end_date, :class => '', :required => '', :pattern => '', :placeholder => 'End Date', :id => 'end_date') %>
 
-                    <% if @task.status == 'completed' %>
-                      <%= f.label :status, 'Status' %>
-                      <%= select_tag('task[status]', options_for_select([['Pending', 'active'], ['Completed', 'completed']], @task.status)) %>
-                    <% end %>
+                    <%= f.label :status, 'Status' %>
+                    <%= select_tag('task[status]', options_for_select([['Pending', 'active'], ['Completed', 'completed']], @task.status)) %>
 
                     <div class="priority-selector">
                       <%= build_validated_select('task', 'priority', 'Priority', 'Should select at least one', '', false, @task.priority, ['Low', 'Medium', 'High', 'Showstopper']) %>
